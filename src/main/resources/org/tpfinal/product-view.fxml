@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="768.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.tpfinal.Product.Controller.ProductController">
+   <Pane prefHeight="768.0" prefWidth="1280.0">
+      <Button fx:id="button" layoutX="520.0" layoutY="315.0" mnemonicParsing="false" onMouseClicked="#test" prefHeight="138.0" prefWidth="241.0" text="TEST" />
+      <Text fx:id="test" layoutX="497.0" layoutY="172.0" strokeType="OUTSIDE" strokeWidth="0.0" text="TEXT" textAlignment="CENTER" visible="false" wrappingWidth="287.13671875">
+         <font>
+            <Font name="System Bold" size="38.0" />
+         </font>
+      </Text>
+   </Pane>
+</AnchorPane>
