@@ -15,16 +15,27 @@ public class PEPS implements IntStrategy {
 
     @Override
     public Seat search(List<Seat> balance, UUID uuid) {
-
+        for(Seat seat : balance){
+            if(seat.getUuid().equals(uuid)){
+                return seat;
+            }
+        }
+        return null;
     }
 
     @Override
-    public void update(List<Seat> balance, Seat toUpdate, Seat updated) {
-
+    public void update(Seat toUpdate, Seat updated) {
+        toUpdate.setAmount(updated.getAmount());
+        toUpdate.setUnitCost(updated.getUnitCost());
     }
 
+    /**
+     * PEPS (FIFO) implementation. Removes first item of the list.
+     *
+     * @param balance list of balances to delete from.
+     */
     @Override
-    public void delete(List<Seat> balance, Seat toDelete) {
-
+    public void delete(List<Seat> balance) {
+        balance.removeFirst();
     }
 }
