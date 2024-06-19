@@ -7,20 +7,15 @@ import java.util.List;
 import java.util.UUID;
 
 public class PEPS implements IntStrategy {
-
+    // Primero en Entrar, Primero en Salir = FIFO = COLA
     @Override
     public void add(List<Seat> balance, Seat add) {
-
+        balance.addFirst(add);
     }
 
     @Override
-    public List<Seat> getList() {
-        return List.of();
-    }
+    public Seat search(List<Seat> balance, UUID uuid) {
 
-    @Override
-    public Seat search(UUID uuid) {
-        return null;
     }
 
     @Override
