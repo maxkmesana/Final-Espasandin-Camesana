@@ -4,6 +4,7 @@ import org.tpfinal.Interfaces.IntStrategy;
 import org.tpfinal.Seat.Entity.Seat;
 
 import java.util.List;
+import java.util.UUID;
 
 public class PEPS implements IntStrategy {
 
@@ -18,7 +19,7 @@ public class PEPS implements IntStrategy {
     }
 
     @Override
-    public Seat search(Integer id) {
+    public Seat search(UUID uuid) {
         return null;
     }
 
