@@ -11,6 +11,4 @@ public interface IntStrategy {
     Seat search(Integer id);
     void update(List<Seat> balance, Seat toUpdate, Seat updated);
     void delete(List<Seat> balance, Seat toDelete);
-    // TODO> AGREGAR ID A SEAT,
-    //       AGREGAR ESE ID EN BUSQUEDAS O ALGO
 }
