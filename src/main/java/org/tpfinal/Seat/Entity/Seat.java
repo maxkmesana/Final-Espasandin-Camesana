@@ -35,4 +35,8 @@ public class Seat {
         this.totalCost = this.amount * this.unitCost;
         // recalculates totalCost automatically.
     }
+
+    public boolean isEmpty(){
+        return unitCost == 0 || amount == 0;
+    }
 }
