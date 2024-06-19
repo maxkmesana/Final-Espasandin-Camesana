@@ -7,6 +7,10 @@ import java.util.List;
 
 public interface IntStrategy {
     void add(List<Seat> balance, Seat add);
-    void update(List<Seat> balance, Date date, String activity, Seat purchase, Seat Sale);
-    List<Seat> get();
+    List<Seat> getList();
+    Seat search(Integer id);
+    void update(List<Seat> balance, Seat toUpdate, Seat updated);
+    void delete(List<Seat> balance, Seat toDelete);
+    // TODO> AGREGAR ID A SEAT,
+    //       AGREGAR ESE ID EN BUSQUEDAS O ALGO
 }
