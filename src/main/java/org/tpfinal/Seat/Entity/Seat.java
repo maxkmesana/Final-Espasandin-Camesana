@@ -2,37 +2,37 @@ package org.tpfinal.Seat.Entity;
 
 public class Seat {
     private Integer amount;
-    private Float unitPrice;
-    private Float totalPrice;
+    private Float unitCost;
+    private Float totalCost;
 
-    public Seat(Integer amount, Float unitPrice) {
+    public Seat(Integer amount, Float unitCost) {
         this.amount = amount;
-        this.unitPrice = unitPrice;
-        this.totalPrice = amount * unitPrice;
+        this.unitCost = unitCost;
+        this.totalCost = amount * unitCost;
     }
 
     public Integer getAmount() {
         return amount;
     }
 
-    public Float getUnitPrice() {
-        return unitPrice;
+    public Float getUnitCost() {
+        return unitCost;
     }
 
-    public Float getTotalPrice() {
-        return totalPrice;
+    public Float getTotalCost() {
+        return totalCost;
     }
 
     public void setAmount(Integer amount) {
         this.amount = amount;
-        this.totalPrice = this.amount * this.unitPrice;
-        // recalculates totalPrice automatically.
+        this.totalCost = this.amount * this.unitCost;
+        // recalculates totalCost automatically.
     }
 
 
-    public void setUnitPrice(Float unitPrice) {
-        this.unitPrice = unitPrice;
-        this.totalPrice = this.amount * this.unitPrice;
-        // recalculates totalPrice automatically.
+    public void setUnitCost(Float unitCost) {
+        this.unitCost = unitCost;
+        this.totalCost = this.amount * this.unitCost;
+        // recalculates totalCost automatically.
     }
 }
