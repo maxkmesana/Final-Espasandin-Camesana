@@ -44,7 +44,7 @@ public class UserController {
     private TextField usernamefield;
 
     @FXML
-    public User userLoginExc() throws EmptyFieldException {
+    public User userLoginLogic() throws EmptyFieldException {
         String username = this.usernamefield.getText();
         String password = this.passwordField.getText();
         if (username.isEmpty() || password.isEmpty()) {
@@ -61,7 +61,7 @@ public class UserController {
     @FXML
     public void userLogin(ActionEvent event) {
         try {
-            User newUserLogin = userLoginExc();
+            User newUserLogin = userLoginLogic();
         } catch (EmptyFieldException e) {
             Alert exception = new Alert(Alert.AlertType.ERROR);
             exception.setHeaderText(null);
@@ -71,10 +71,10 @@ public class UserController {
         }
     }
 
-    private void showModalWindow(Parent root) {
+    private void showModalWindow(Scene scene) {
         Stage stage = new Stage();
         stage.initModality(Modality.APPLICATION_MODAL);
-        stage.setScene(new Scene(root));
+        stage.setScene(scene);
         stage.setResizable(false);
         stage.showAndWait();
     }
@@ -82,11 +82,11 @@ public class UserController {
     @FXML
     public void createUser(ActionEvent event){
         try{
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("src/main/resources/org/tpfinal/userSign.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/org/tpfinal/userSign.fxml"));
             Parent root = loader.load();
             UserSignController signController = loader.getController();
             Scene scene = new Scene(root, 600, 600);
-            showModalWindow(root);
+            showModalWindow(scene);
         }catch(IOException e){
             Alert exception = new Alert(Alert.AlertType.ERROR);
             exception.setHeaderText(null);

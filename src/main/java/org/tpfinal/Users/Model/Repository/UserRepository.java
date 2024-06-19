@@ -18,7 +18,7 @@ public class UserRepository implements IntRepository<User> {
 
     @Override
     public void add(User add) {
-
+        userMap.put(add.getId(), add);
     }
 
     @Override

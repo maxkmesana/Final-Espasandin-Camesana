@@ -7,7 +7,7 @@
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane prefHeight="548.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.tpfinal.Users.Controller.UserController">
+<AnchorPane fx:id="anchorLogin" prefHeight="548.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.tpfinal.Users.Controller.UserController">
    <children>
       <Label fx:id="label" alignment="CENTER" layoutX="212.0" layoutY="69.0" prefHeight="37.0" prefWidth="177.0" text="Welcome, please login" textAlignment="CENTER" />
       <Separator layoutY="129.0" prefHeight="8.0" prefWidth="600.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="129.0" />
@@ -16,6 +16,6 @@
       <Button fx:id="loginButton" alignment="CENTER" layoutX="248.0" layoutY="329.0" mnemonicParsing="false" onAction="#userLogin" prefHeight="25.0" prefWidth="106.0" text="Login" />
       <Separator layoutY="389.0" prefHeight="8.0" prefWidth="605.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="389.0" />
       <Label fx:id="label2" alignment="CENTER" layoutX="212.0" layoutY="412.0" prefHeight="37.0" prefWidth="177.0" text="First time here?" textAlignment="CENTER" />
-      <Button fx:id="signInButton" layoutX="247.0" layoutY="465.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="106.0" text="Sign up" />
+      <Button fx:id="signInButton" layoutX="247.0" layoutY="465.0" mnemonicParsing="false" onAction="#createUser" prefHeight="25.0" prefWidth="106.0" text="Sign up" />
    </children>
 </AnchorPane>

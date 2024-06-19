@@ -14,7 +14,7 @@ public class User extends Person {
     private String path;
     private Set<Product> productSet;
 
-    public User(String name, String email, UUID id, String username, String password, String path, Set<Product> productSet) {
+    public User(String name, String email, String username, String password) {
         super(name, email);
         this.id = UUID.randomUUID();
         this.username = username;
