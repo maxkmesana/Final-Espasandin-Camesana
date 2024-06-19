@@ -70,6 +70,31 @@ public class UserController {
             exception.showAndWait();
         }
     }
+
+    private void showModalWindow(Parent root) {
+        Stage stage = new Stage();
+        stage.initModality(Modality.APPLICATION_MODAL);
+        stage.setScene(new Scene(root));
+        stage.setResizable(false);
+        stage.showAndWait();
+    }
+
+    @FXML
+    public void createUser(ActionEvent event){
+        try{
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("src/main/resources/org/tpfinal/userSign.fxml"));
+            Parent root = loader.load();
+            UserSignController signController = loader.getController();
+            Scene scene = new Scene(root, 600, 600);
+            showModalWindow(root);
+        }catch(IOException e){
+            Alert exception = new Alert(Alert.AlertType.ERROR);
+            exception.setHeaderText(null);
+            exception.setTitle("Error");
+            exception.setContentText(e.getMessage());
+            exception.showAndWait();
+        }
+    }
 }
 
 
