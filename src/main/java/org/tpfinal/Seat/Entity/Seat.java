@@ -1,14 +1,22 @@
 package org.tpfinal.Seat.Entity;
 
+import java.util.UUID;
+
 public class Seat {
+    private final UUID uuid;
     private Integer amount;
     private Float unitCost;
     private Float totalCost;
 
     public Seat(Integer amount, Float unitCost) {
+        this.uuid = UUID.randomUUID();
         this.amount = amount;
         this.unitCost = unitCost;
         this.totalCost = amount * unitCost;
+    }
+
+    public UUID getUuid() {
+        return uuid;
     }
 
     public Integer getAmount() {
@@ -34,5 +42,9 @@ public class Seat {
         this.unitCost = unitCost;
         this.totalCost = this.amount * this.unitCost;
         // recalculates totalCost automatically.
+    }
+
+    public boolean isEmpty(){
+        return unitCost == 0 || amount == 0;
     }
 }
