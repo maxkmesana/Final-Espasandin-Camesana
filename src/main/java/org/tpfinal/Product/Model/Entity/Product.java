@@ -4,13 +4,13 @@ import java.util.Objects;
 
 public class Product {
     private String name;
-    private String decripcion;
+    private String decription;
     private Integer totalStock;
     private Float totalPrice;
 
-    public Product(String name, String decripcion) {
+    public Product(String name, String decription) {
         this.name = name;
-        this.decripcion = decripcion;
+        this.decription = decription;
     }
 
     public String getName() {
@@ -21,12 +21,12 @@ public class Product {
         this.name = name;
     }
 
-    public String getDecripcion() {
-        return decripcion;
+    public String getDecription() {
+        return decription;
     }
 
-    public void setDecripcion(String decripcion) {
-        this.decripcion = decripcion;
+    public void setDecription(String decription) {
+        this.decription = decription;
     }
 
     public Integer getTotalStock() {
