@@ -44,6 +44,10 @@ public class Seat {
         // recalculates totalCost automatically.
     }
 
+    public void setTotalCost(Float totalCost) {
+        this.totalCost = totalCost;
+    }
+
     public boolean isEmpty(){
         return unitCost == 0 || amount == 0;
     }
