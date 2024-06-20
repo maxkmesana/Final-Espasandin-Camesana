@@ -9,12 +9,11 @@ import org.tpfinal.Users.Model.Entity.User;
 
 import java.io.*;
 import java.lang.reflect.Type;
-import java.util.Comparator;
 import java.util.Map;
 import java.util.TreeMap;
-import java.util.UUID;
 
-public class UserRepository implements IntRepository<User>{
+
+public class UserRepository{
     private static final String PATH = "src/main/resources/user.json";
     private Gson gson = new GsonBuilder().setPrettyPrinting().serializeNulls().create();
     private Map<String, User> userMap;
@@ -29,7 +28,7 @@ public class UserRepository implements IntRepository<User>{
             userMap = gson.fromJson(reader, collectionType);
             if(userMap==null){
                 userMap = new TreeMap<>(String::compareTo);
-            }
+            }//TODO : DO LOADCOLLECTION WHEN ENTITIES ARE COMPLETED
         }catch(FileNotFoundException e){
             userMap = new TreeMap<>(String::compareTo);
         }catch(IOException e){
@@ -45,13 +44,11 @@ public class UserRepository implements IntRepository<User>{
         }
     }
 
-    @Override
     public void add(User add) {
         userMap.put(add.getUsername(), add);
         saveToJson();
     }
 
-    @Override
     public User search(String searchField) {
         for(Map.Entry<String, User> entry : userMap.entrySet()){
             User temp = entry.getValue();
@@ -77,16 +74,6 @@ public class UserRepository implements IntRepository<User>{
             return BCrypt.checkpw(unckeck.getPassword(), toCheck.getPassword());
         }
         return false;
-    }
-
-    @Override
-    public void update(User toUpdate, User updated) {
-
-    }
-
-    @Override
-    public void remove(User remove) {
-
     }
 
 }
