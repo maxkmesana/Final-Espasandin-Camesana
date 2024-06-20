@@ -1,22 +1,44 @@
 package org.tpfinal.Product.Controller;
 
 import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
-import javafx.scene.input.MouseEvent;
-import javafx.scene.text.Text;
+import javafx.scene.control.Label;
+import javafx.scene.control.SplitPane;
+import javafx.scene.layout.AnchorPane;
 
-public class ProductController {
+import java.net.URL;
+import java.util.ResourceBundle;
 
-    @FXML
-    private Button button;
-
-    @FXML
-    private Text test;
+public class ProductController implements Initializable {
 
     @FXML
-    void test(MouseEvent event) {
-        test.setText("TEST TEST");
-        test.setVisible(true);
+    private Button buttonAdd;
+
+    @FXML
+    private Button buttonChange;
+
+    @FXML
+    private Button buttonExit;
+
+    @FXML
+    private Button buttonManagment;
+
+    @FXML
+    private Label labelLanding;
+
+    @FXML
+    private AnchorPane menuAnchor;
+
+    @FXML
+    private SplitPane splitPane;
+
+    @FXML
+    private Label username;
+
+    @Override
+    public void initialize(URL url, ResourceBundle resourceBundle) {
+
     }
-
 }
+
