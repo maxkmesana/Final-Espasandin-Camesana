@@ -9,5 +9,5 @@ public interface IntStrategy {
     void add(List<Seat> balance, Seat add);
     Seat search(List<Seat> balance, UUID uuid);
     void update(Seat toUpdate, Seat updated);
-    void delete(List<Seat> balance);
+    List<Seat> delete(List<Seat> balance, Integer saleAmount);
 }
