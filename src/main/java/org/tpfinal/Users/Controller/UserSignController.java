@@ -2,19 +2,19 @@ package org.tpfinal.Users.Controller;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
 import javafx.scene.control.*;
+import javafx.stage.Stage;
 import org.tpfinal.Exception.EmptyFieldException;
 import org.tpfinal.Exception.PasswordLimitException;
 import org.tpfinal.Users.Model.Entity.User;
 import org.tpfinal.Users.Model.Repository.UserRepository;
 
-public class UserSignController {
+import java.net.URL;
+import java.util.ResourceBundle;
 
+public class UserSignController implements Initializable {
     private UserRepository userRepository;
-
-    public UserSignController(UserRepository userRepository) {
-        this.userRepository = userRepository;
-    }
 
     public UserSignController() {
     }
@@ -37,10 +37,15 @@ public class UserSignController {
     @FXML
     private TextField usernameField;
 
+    @Override
+    public void initialize(URL url, ResourceBundle resourceBundle) {
+        userRepository = new UserRepository();
+    }
+
     @FXML
     public User createUserLogic() throws EmptyFieldException, PasswordLimitException {
         String name = this.nameField.getText();
-        String email = this.emailField.getText();
+        String email = this.emailField.getText(); // TODO : create email taken exception.
         String username = this.usernameField.getText();
         String password = this.passwordField.getText();
         if(name.isEmpty() || email.isEmpty() || username.isEmpty() || password.isEmpty()){
@@ -57,6 +62,8 @@ public class UserSignController {
         try{
             User newUser = createUserLogic();
             userRepository.add(newUser);
+            Stage stage = (Stage) this.button.getScene().getWindow();
+            stage.close();
         } catch (EmptyFieldException e) {
             Alert exception = new Alert(Alert.AlertType.ERROR);
             exception.setHeaderText(null);
@@ -71,5 +78,4 @@ public class UserSignController {
             exception.showAndWait();
         }
     }
-
 }

@@ -2,6 +2,7 @@ package org.tpfinal.Users.Controller;
 
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
@@ -13,14 +14,12 @@ import org.tpfinal.Users.Model.Repository.UserRepository;
 import javafx.event.*;
 
 import java.io.IOException;
+import java.net.URL;
+import java.util.ResourceBundle;
 
-public class UserController {
+public class UserController implements Initializable {
 
     private UserRepository userRepository;
-
-    public UserController(UserRepository userRepository) {
-        this.userRepository = userRepository;
-    }
 
     public UserController() {
     }
@@ -42,6 +41,11 @@ public class UserController {
 
     @FXML
     private TextField usernamefield;
+
+    @Override
+    public void initialize(URL url, ResourceBundle resourceBundle) {
+        userRepository = new UserRepository();
+    }
 
     @FXML
     public User userLoginLogic() throws EmptyFieldException {
@@ -95,6 +99,7 @@ public class UserController {
             exception.showAndWait();
         }
     }
+
 }
 
 

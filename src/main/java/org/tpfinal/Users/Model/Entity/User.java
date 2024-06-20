@@ -19,7 +19,7 @@ public class User extends Person {
         this.id = UUID.randomUUID();
         this.username = username;
         this.password = BCrypt.hashpw(password, BCrypt.gensalt());
-        this.path = "src/main/resources" + username + ".json";
+        this.path = "src/main/resources/" + username + ".json";
         this.productSet = new TreeSet<>((u1, u2) -> u1.getName().compareTo(u2.getName()));
     }
 
@@ -62,11 +62,11 @@ public class User extends Person {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         User user = (User) o;
-        return Objects.equals(id, user.id);
+        return Objects.equals(username, user.username);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hashCode(id);
+        return Objects.hashCode(username);
     }
 }

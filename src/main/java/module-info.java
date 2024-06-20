@@ -5,6 +5,10 @@ module org.tpfinal.finalcamesanaespasandin {
     requires com.google.gson;
     requires java.desktop;
 
+
+    opens org.tpfinal.Abstracts to com.google.gson;
+    opens org.tpfinal.Product.Model.Entity to com.google.gson;
+    opens org.tpfinal.Users.Model.Entity to com.google.gson;
     opens org.tpfinal to javafx.fxml;
     opens org.tpfinal.Users.Controller to javafx.fxml;
     exports org.tpfinal;
