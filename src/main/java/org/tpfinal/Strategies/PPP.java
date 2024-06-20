@@ -8,10 +8,8 @@ import org.tpfinal.Seat.Entity.Seat;
 import java.util.List;
 import java.util.UUID;
 
-public class PPP implements IntStrategy {
+public class PPP{
 
-    // TODO> throws DivisionByZeroException
-    @Override
     public void add(List<Seat> balance, Seat add) throws DivisionByZeroException {
         Seat first = balance.getFirst();
         if(first == null){
@@ -22,22 +20,18 @@ public class PPP implements IntStrategy {
             if (first.getAmount() == 0){
                 throw new DivisionByZeroException();
             }
-            first.
+            first.setTotalCost(first.getTotalCost() + add.getTotalCost());
+            first.setUnitCost(first.getTotalCost() / first.getUnitCost());
         }
     }
 
-    @Override
     public Seat search(List<Seat> balance, UUID uuid) {
-        return null;
+        return balance.getFirst();
     }
 
-    @Override
     public void update(Seat toUpdate, Seat updated) {
-
+        toUpdate.setAmount(updated.getAmount());
+        toUpdate.setUnitCost(updated.getUnitCost());
     }
 
-    @Override
-    public List<Seat> delete(List<Seat> balance, Integer saleAmount) {
-
-    }
 }
