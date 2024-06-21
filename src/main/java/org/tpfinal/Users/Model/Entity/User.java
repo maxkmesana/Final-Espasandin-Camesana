@@ -12,7 +12,7 @@ public class User extends Person {
     private String username;
     private String password;
     private String path;
-    private Set<Product> productSet;
+    private static Set<Product> productSet;
 
     public User(String name, String email, String username, String password) {
         super(name, email);
@@ -45,7 +45,7 @@ public class User extends Person {
         return path;
     }
 
-    public Set<Product> getProductSet() {
+    public static Set<Product> getProductSet() {
         return productSet;
     }
 
