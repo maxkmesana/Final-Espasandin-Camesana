@@ -3,21 +3,21 @@ package org.tpfinal.StockFile.Model.Entity;
 import org.tpfinal.Interfaces.IntStrategy;
 import org.tpfinal.Seat.Entity.Seat;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 import java.util.UUID;
 
 public class StockFile {
-    private Date date;
+    private LocalDate date;
     private String activity;
     private Seat purchase;
     private Seat sale;
     private final List<Seat> balance;
     private IntStrategy balanceStrategy;
 
-    public StockFile(Date date, String activity, Seat purchase, Seat sale, IntStrategy balanceStrategy) {
-        this.date = date;
+    public StockFile(String activity, Seat purchase, Seat sale, IntStrategy balanceStrategy) {
+        this.date = LocalDate.now();
         this.activity = activity;
         this.purchase = purchase;
         this.sale = sale;
@@ -25,11 +25,11 @@ public class StockFile {
         this.balance = new ArrayList<>();
     }
 
-    public Date getDate() {
+    public LocalDate getDate() {
         return date;
     }
 
-    public void setDate(Date date) {
+    public void setDate(LocalDate date) {
         this.date = date;
     }
 
@@ -79,5 +79,29 @@ public class StockFile {
     
     public void deleteBalance(){
         balanceStrategy.delete(balance, sale.getAmount());
+    }
+
+    public Float getTotalCostPurchase(){
+        return purchase.getTotalCost();
+    }
+
+    public Float getTotalCostSale(){
+        return sale.getTotalCost();
+    }
+
+    public Integer getUnitPurchase(){
+        return purchase.getAmount();
+    }
+
+    public Integer getUnitSale(){
+        return sale.getAmount();
+    }
+
+    public Float getUnitCostPurchase(){
+        return purchase.getUnitCost();
+    }
+
+    public Float getUnitCostSale(){
+        return sale.getUnitCost();
     }
 }

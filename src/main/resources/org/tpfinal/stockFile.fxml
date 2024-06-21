@@ -7,9 +7,9 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane fx:id="anchor" prefHeight="600.0" prefWidth="1024.0" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.tpfinal.SotckFile">
+<AnchorPane fx:id="anchor" prefHeight="600.0" prefWidth="1024.0" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.tpfinal.StockFile.Controller.StockFileController">
    <children>
-      <TableView fx:id="tableStockFiles" layoutX="38.0" layoutY="73.0" prefHeight="389.0" prefWidth="643.0">
+      <TableView fx:id="tableStockFiles" layoutX="38.0" layoutY="73.0" onMouseClicked="#selectFile" prefHeight="389.0" prefWidth="643.0">
          <columns>
             <TableColumn fx:id="dateColumn" editable="false" prefWidth="99.0" sortable="false" text="Date" />
             <TableColumn fx:id="activitiesColumn" editable="false" prefWidth="92.0" sortable="false" text="Activities" />

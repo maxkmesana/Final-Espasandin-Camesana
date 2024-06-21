@@ -5,14 +5,15 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
+import org.tpfinal.Product.Model.Entity.Product;
 
 import java.io.IOException;
 
 public class Main extends Application {
     @Override
     public void start(Stage stage) throws IOException {
-        FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("userLogin.fxml"));
-        Scene scene = new Scene(fxmlLoader.load(), 600, 600.0);
+        FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("stockFile.fxml"));
+        Scene scene = new Scene(fxmlLoader.load());
         stage.setTitle("Welcome to StockManager");
         stage.setScene(scene);
         stage.setResizable(false);
