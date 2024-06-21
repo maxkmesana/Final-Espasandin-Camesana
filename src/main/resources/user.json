@@ -1,0 +1,10 @@
+{
+  "yate": {
+    "id": "856dbc13-8421-4d3e-bd65-8e0496aed523",
+    "username": "yate",
+    "password": "$2a$10$ENN2TtXKvJW.3wnP0hBLc.W4yuUL5ezPaaGKPI80qcme.y47PLEZe",
+    "path": "src/main/resources/yate.json",
+    "name": "yate",
+    "email": "yate@gmail.com"
+  }
+}

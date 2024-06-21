@@ -1,19 +1,18 @@
 package org.tpfinal.Product.Model.Repository;
 
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableSet;
 import org.tpfinal.Interfaces.IntRepository;
 import org.tpfinal.Product.Model.Entity.Product;
 
-import java.util.HashSet;
-import java.util.Set;
-
 public class ProductRepository implements IntRepository<Product> {
-    private final Set<Product> productSet; // seria final?
+    private static ObservableSet<Product> productSet;
 
     public ProductRepository() {
-        this.productSet = new HashSet<>();
-    } // Se puede cambiar por implementacion de JSON.
+        this.productSet = FXCollections.observableSet();
+    }
 
-    public Set<Product> getProductSet() {
+    public static ObservableSet<Product> getProductSet() {
         return productSet;
     }
 
@@ -34,8 +33,8 @@ public class ProductRepository implements IntRepository<Product> {
 
     @Override
     public void update(Product toUpdate, Product updated) {
-        toUpdate.setTotalPrice(updated.getTotalPrice());
-        toUpdate.setTotalStock(updated.getTotalStock());
+        toUpdate.setName(updated.getName());
+        toUpdate.setDescription(updated.getDescription());
     }
 
     @Override

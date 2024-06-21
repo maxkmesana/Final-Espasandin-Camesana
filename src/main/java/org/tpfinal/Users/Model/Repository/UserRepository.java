@@ -4,7 +4,6 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.reflect.TypeToken;
 import org.mindrot.jbcrypt.BCrypt;
-import org.tpfinal.Interfaces.IntRepository;
 import org.tpfinal.Users.Model.Entity.User;
 
 import java.io.*;
@@ -28,11 +27,19 @@ public class UserRepository{
             userMap = gson.fromJson(reader, collectionType);
             if(userMap==null){
                 userMap = new TreeMap<>(String::compareTo);
-            }//TODO : DO LOADCOLLECTION WHEN ENTITIES ARE COMPLETED
+            }else{
+                loadColection();
+            }
         }catch(FileNotFoundException e){
             userMap = new TreeMap<>(String::compareTo);
         }catch(IOException e){
             e.printStackTrace();
+        }
+    }
+
+    public void loadColection(){
+        for(Map.Entry<String, User> entry : userMap.entrySet()){
+            userMap.put(entry.getKey(), entry.getValue());
         }
     }
 
@@ -60,16 +67,11 @@ public class UserRepository{
     }
 
     public User userExistance(String searchField){
-        for(Map.Entry<String, User> entry : userMap.entrySet()){
-            if(entry.getValue().getUsername().equals(searchField)){
-                return entry.getValue();
-            }
-        }
-        return null;
+        return userMap.get(searchField);
     }
 
     public boolean userPasswordCheck(User unckeck){
-        User toCheck = userExistance(unckeck.getName());
+        User toCheck = userExistance(unckeck.getUsername());
         if(toCheck!=null){
             return BCrypt.checkpw(unckeck.getPassword(), toCheck.getPassword());
         }
