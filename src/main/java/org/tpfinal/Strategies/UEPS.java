@@ -1,5 +1,6 @@
 package org.tpfinal.Strategies;
 
+import org.tpfinal.Exception.ExceedsAvailableException;
 import org.tpfinal.Interfaces.IntStrategy;
 import org.tpfinal.Seat.Entity.Seat;
 
@@ -31,7 +32,6 @@ public class UEPS  implements IntStrategy{
         toUpdate.setUnitCost(updated.getUnitCost());
     }
 
-    // TODO: ADD EXCEPTION IF SALEAMOUNT > TOTAL AMOUNT
     /**
      *
      * Contains three base cases: <p>
@@ -51,13 +51,17 @@ public class UEPS  implements IntStrategy{
      * @return a new list containing all the Seat movements made to the original list.
      */
     @Override
-    public List<Seat> delete(List<Seat> balance, Integer saleAmount) {
+    public List<Seat> delete(List<Seat> balance, Integer saleAmount) throws ExceedsAvailableException {
         List<Seat> seatReturn = new ArrayList<>();
 
         Iterator<Seat> iterator = balance.iterator();
 
         while (iterator.hasNext()){
             Seat currentSeat = iterator.next();
+
+            if(saleAmount > getTotalUnits(balance)){
+                throw new ExceedsAvailableException();
+            }
 
             if(saleAmount.equals(currentSeat.getAmount())){
                 // Adds Seat to return list
@@ -80,6 +84,14 @@ public class UEPS  implements IntStrategy{
             }
         }
         return seatReturn;
+    }
+
+    public Integer getTotalUnits(List<Seat> balance){
+        Integer totalUnits = 0;
+        for (Seat seat : balance){
+            totalUnits += seat.getAmount();
+        }
+        return totalUnits;
     }
 
     public String toString(){

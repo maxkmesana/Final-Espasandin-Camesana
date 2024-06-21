@@ -1,5 +1,6 @@
 package org.tpfinal.Strategies;
 
+import org.tpfinal.Exception.ExceedsAvailableException;
 import org.tpfinal.Interfaces.IntStrategy;
 import org.tpfinal.Seat.Entity.Seat;
 
@@ -52,6 +53,10 @@ public class PEPS implements IntStrategy {
 
         Iterator<Seat> iterator = balance.iterator();
 
+        if(saleAmount > getTotalUnits(balance)){
+            throw new ExceedsAvailableException();
+        }
+
         while (iterator.hasNext()){
             Seat currentSeat = iterator.next();
 
@@ -76,6 +81,14 @@ public class PEPS implements IntStrategy {
             }
         }
         return seatReturn;
+    }
+
+    public Integer getTotalUnits(List<Seat> balance){
+        Integer totalUnits = 0;
+        for (Seat seat : balance){
+            totalUnits += seat.getAmount();
+        }
+        return totalUnits;
     }
 
     public String toString(){

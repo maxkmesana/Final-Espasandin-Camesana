@@ -8,12 +8,12 @@ import java.util.List;
 public class Test {
     // TODO: DELETE THIS ENTIRE FILE
     public static void main(String[] args) {
-        PPP ppp = new PPP();
+        UEPS ueps = new UEPS();
         ArrayList<Seat> list = new ArrayList<>();
 
-        ppp.add(list, new Seat(2,2f));
-        ppp.add(list, new Seat(3,3f));
-        ppp.add(list, new Seat(4,4f));
+        ueps.add(list, new Seat(2,2f));
+        ueps.add(list, new Seat(3,3f));
+        ueps.add(list, new Seat(4,4f));
 //        for(Seat seat : list){
 //            System.out.println(seat.getAmount());
 //        }
@@ -25,7 +25,7 @@ public class Test {
         }
         System.out.println("\n");
 
-        List<Seat> response = ppp.delete(list, 10);
+        List<Seat> response = ueps.delete(list, 10);
 
         System.out.println("LISTA ORIGINAL MODIFICADA: ");
         for(int i = list.size() - 1; i >= 0; i--){
