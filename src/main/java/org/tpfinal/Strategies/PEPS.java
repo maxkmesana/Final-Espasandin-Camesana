@@ -77,4 +77,8 @@ public class PEPS implements IntStrategy {
         }
         return seatReturn;
     }
+
+    public String toString(){
+        return "FIFO";
+    }
 }

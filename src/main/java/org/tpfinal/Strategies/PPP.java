@@ -1,8 +1,7 @@
 package org.tpfinal.Strategies;
 
 import org.tpfinal.Exception.DivisionByZeroException;
-import org.tpfinal.Exception.LessThanZeroException;
-import org.tpfinal.Interfaces.IntRepository;
+import org.tpfinal.Exception.ExceedsAvailableException;
 import org.tpfinal.Interfaces.IntStrategy;
 import org.tpfinal.Seat.Entity.Seat;
 
@@ -14,10 +13,10 @@ public class PPP implements IntStrategy{
 
     @Override
     public void add(List<Seat> balance, Seat add) throws DivisionByZeroException {
-        Seat first = balance.getFirst();
-        if(first == null){
+        if(balance.isEmpty()){
             balance.add(add);
         }else{
+            Seat first = balance.getFirst();
             first.setAmount(first.getAmount() + add.getAmount());
 
             if (first.getAmount() == 0){
@@ -39,16 +38,23 @@ public class PPP implements IntStrategy{
     }
 
     @Override
-    public List<Seat> delete(List<Seat> balance, Integer saleAmount) throws LessThanZeroException {
+    public List<Seat> delete(List<Seat> balance, Integer saleAmount) throws ExceedsAvailableException {
+
+        List<Seat> seatReturn = new ArrayList<>();
         Seat first = balance.getFirst();
 
         first.setAmount(first.getAmount() - saleAmount);
         if (first.getAmount() < 0){
-            throw new LessThanZeroException();
+            throw new ExceedsAvailableException();
         }
+        seatReturn.add(new Seat(saleAmount, first.getUnitCost()));
         first.setTotalCost(first.getAmount() * first.getUnitCost());
 
-        return balance;
+        return seatReturn;
+    }
+
+    public String toString(){
+        return "WAC";
     }
 
 }
