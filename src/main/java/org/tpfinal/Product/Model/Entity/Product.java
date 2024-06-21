@@ -1,16 +1,22 @@
 package org.tpfinal.Product.Model.Entity;
 
+import org.tpfinal.StockFile.Model.Entity.StockFile;
+
+import java.util.LinkedList;
+import java.util.List;
 import java.util.Objects;
 
 public class Product {
     private String name;
-    private String decription;
-    private Integer totalStock;
-    private Float totalPrice;
+    private String description;
+    private List<StockFile> stockFileList;
 
-    public Product(String name, String decription) {
+    public Product(String name, String description) {
         this.name = name;
-        this.decription = decription;
+        this.description = description;
+        this.stockFileList = new LinkedList<>();/**
+                                                   check about the collection use, may not be the greater solution.
+                                                */
     }
 
     public String getName() {
@@ -21,68 +27,20 @@ public class Product {
         this.name = name;
     }
 
-    public String getDecription() {
-        return decription;
+    public String getDescription() {
+        return description;
     }
 
-    public void setDecription(String decription) {
-        this.decription = decription;
+    public void setDescription(String description) {
+        this.description = description;
     }
 
-    public Integer getTotalStock() {
-        return totalStock;
+    public List<StockFile> getStockFileList() {
+        return stockFileList;
     }
 
-    public void setTotalStock(Integer totalStock) {
-        this.totalStock = totalStock;
-    }
-
-    public Float getTotalPrice() {
-        return totalPrice;
-    }
-
-    public void setTotalPrice(Float totalPrice) {
-        this.totalPrice = totalPrice;
-    }
-
-    /**
-     * Should be used in <code>StockFile</code> to increase amount of <code>totalStock</code>
-     * of a Product object when new stock enters our system.
-     *
-     * @param amount desired amount to increase
-     */
-    public void increaseTotalStock(Integer amount){
-        totalStock += amount;
-    }
-
-    /**
-     * Should be used in <code>StockFile</code> to decrease amount of <code>totalStock</code>
-     * of a Product object when stock leaves our system.
-     *
-     * @param amount desired amount to decrease
-     */
-    public void decreaseTotalStock(Integer amount){
-        totalStock-= amount;
-    }
-
-    /**
-     * Should be used in <code>StockFile</code> to increase amount of <code>totalPrice</code>
-     * of a Product object when new stock enters our system.
-     *
-     * @param amount desired amount to increase
-     */
-    public void increaseTotalPrice(Float amount){
-        totalPrice += amount;
-    }
-
-    /**
-     * Should be used in <code>StockFile</code> to decrease amount of <code>totalPrice</code>
-     * of a Product object when stock leaves our system.
-     *
-     * @param amount desired amount to decrease
-     */
-    public void decreaseTotalPrice(Float amount){
-        totalPrice-= amount;
+    public void setStockFileList(List<StockFile> stockFileList) {
+        this.stockFileList = stockFileList;
     }
 
     @Override

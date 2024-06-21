@@ -17,7 +17,13 @@ import java.util.ResourceBundle;
 public class UserSignController implements Initializable {
     private UserRepository userRepository;
 
+    private static User temp;
+
     public UserSignController() {
+    }
+
+    public static User getTemp() {
+        return temp;
     }
 
     @FXML
@@ -66,6 +72,7 @@ public class UserSignController implements Initializable {
         try{
             User newUser = createUserLogic();
             userRepository.add(newUser);
+            temp = newUser;
             Stage stage = (Stage) this.button.getScene().getWindow();
             stage.close();
         } catch (EmptyFieldException e) {
