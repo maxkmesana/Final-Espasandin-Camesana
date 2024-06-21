@@ -53,4 +53,8 @@ public class PPP implements IntStrategy{
         return seatReturn;
     }
 
+    public String toString(){
+        return "WAC";
+    }
+
 }
