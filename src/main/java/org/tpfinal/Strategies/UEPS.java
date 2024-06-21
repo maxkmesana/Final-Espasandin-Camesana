@@ -31,7 +31,7 @@ public class UEPS  implements IntStrategy{
         toUpdate.setUnitCost(updated.getUnitCost());
     }
 
-    // TODO: MODIFY THE JAVADOC BELOW v
+    // TODO: ADD EXCEPTION IF SALEAMOUNT > TOTAL AMOUNT
     /**
      *
      * Contains three base cases: <p>
