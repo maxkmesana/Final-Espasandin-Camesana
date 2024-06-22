@@ -64,7 +64,9 @@ public class UserSignController implements Initializable {
         if(userRepository.search(email)!=null){
             throw new EmailTakenException();
         }
-        return new User(name, email, username, password);
+        User newUser = new User(name, email, username, password);
+        userRepository.saveToJson();
+        return newUser;
     }
 
     @FXML

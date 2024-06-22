@@ -1,18 +1,25 @@
 package org.tpfinal.Users.Model.Entity;
-import java.util.Objects;
-import java.util.Set;
-import java.util.TreeSet;
-import java.util.UUID;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.nio.file.Paths;
+import java.util.*;
+
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableSet;
 import org.mindrot.jbcrypt.BCrypt;
 import org.tpfinal.Abstracts.Person;
 import org.tpfinal.Product.Model.Entity.Product;
+import org.tpfinal.Users.Model.Repository.UserRepository;
 
 public class User extends Person {
     private UUID id;
     private String username;
     private String password;
     private String path;
-    private static Set<Product> productSet;
+    private Set<Product> productSet;
+    //private static ObservableSet<Product> productSet;
 
     public User(String name, String email, String username, String password) {
         super(name, email);
@@ -20,7 +27,7 @@ public class User extends Person {
         this.username = username;
         this.password = BCrypt.hashpw(password, BCrypt.gensalt());
         this.path = "src/main/resources/" + username + ".json";
-        this.productSet = new TreeSet<>((u1, u2) -> u1.getName().compareTo(u2.getName()));
+        this.productSet = new HashSet<>();
     }
 
     public User(String username, String password) {
@@ -45,7 +52,8 @@ public class User extends Person {
         return path;
     }
 
-    public static Set<Product> getProductSet() {
+
+    public Set<Product> getProductSet() {
         return productSet;
     }
 
@@ -69,4 +77,5 @@ public class User extends Person {
     public int hashCode() {
         return Objects.hashCode(username);
     }
+
 }

@@ -5,14 +5,17 @@ import javafx.collections.ObservableSet;
 import org.tpfinal.Interfaces.IntRepository;
 import org.tpfinal.Product.Model.Entity.Product;
 
+import java.util.HashSet;
+import java.util.Set;
+
 public class ProductRepository implements IntRepository<Product> {
-    private static ObservableSet<Product> productSet;
+    private static Set<Product> productSet;
 
     public ProductRepository() {
-        this.productSet = FXCollections.observableSet();
+        this.productSet = new HashSet<>();
     }
 
-    public static ObservableSet<Product> getProductSet() {
+    public static Set<Product> getProductSet() {
         return productSet;
     }
 

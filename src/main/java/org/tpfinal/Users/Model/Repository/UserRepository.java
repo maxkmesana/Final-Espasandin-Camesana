@@ -13,9 +13,13 @@ import java.util.TreeMap;
 
 
 public class UserRepository{
-    private static final String PATH = "src/main/resources/user.json";
+    private static String PATH = "src/main/resources/user.json";
     private Gson gson = new GsonBuilder().setPrettyPrinting().serializeNulls().create();
     private Map<String, User> userMap;
+
+    public Map<String, User> getUserMap() {
+        return userMap;
+    }
 
     public UserRepository() {
         loadFromJson();

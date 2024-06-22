@@ -9,6 +9,7 @@ import java.util.Objects;
 public class Product {
     private String name;
     private String description;
+    //private String strategy;
     private List<StockFile> stockFileList;
 
     public Product(String name, String description) {
