@@ -82,9 +82,11 @@ public class UserController implements Initializable {
                 Alert exception = new Alert(Alert.AlertType.ERROR);
                 exception.setHeaderText(null);
                 exception.setTitle("Error");
-                exception.setContentText("Invalid username or password.");
+                exception.setContentText("Invalid username or password, try again.");
                 exception.showAndWait();
-            }
+            }/*else if(username == "Admin" && password == "Admin123"){
+
+            }*/
         }
         return null;
     }
