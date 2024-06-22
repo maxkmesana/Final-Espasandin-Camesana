@@ -18,11 +18,10 @@ public class StockFileRepository implements IntRepository<StockFile> {
         stockFileList.add(add);
     }
 
-    // TODO: REFACTORIZAR EL SEARCH (String --> UUID en repo GENERICO)
     @Override
     public StockFile search(String searchField) {
         for(StockFile stockFile : stockFileList){
-            if(stockFile.getActivity().equals(searchField)){ // TODO: CAMBIAR POR UUID
+            if(stockFile.getActivity().equals(searchField)){
                 return stockFile;
             }
         }

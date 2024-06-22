@@ -1,5 +1,7 @@
 package org.tpfinal.Interfaces;
 
+import org.tpfinal.Exception.DivisionByZeroException;
+import org.tpfinal.Exception.ExceedsAvailableException;
 import org.tpfinal.Seat.Entity.Seat;
 
 import java.util.List;

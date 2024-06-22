@@ -17,6 +17,7 @@ public class Main extends Application {
         stage.setTitle("Welcome to StockManager");
         stage.setScene(scene);
         stage.setResizable(false);
+
         stage.show();
     }
 

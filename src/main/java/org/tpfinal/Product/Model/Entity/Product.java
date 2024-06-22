@@ -18,11 +18,6 @@ public class Product {
 
     static {
         stockFileList = new LinkedList<>();
-
-        // TODO: DELETE THESE .add BELOW
-        stockFileList.add(new StockFile("Compra", new Seat(5, 2.5f),new Seat(0, 0f), new UEPS()));
-        stockFileList.add(new StockFile("Compra", new Seat(20, 4.5f),new Seat(0, 0f), new UEPS()));
-        stockFileList.add(new StockFile("Compra", new Seat(40, 6f),new Seat(0, 0f), new UEPS()));
     }
 
     public Product(String name, String description) {

@@ -1,19 +1,22 @@
 package org.tpfinal.StockFile.Controller;
 
-import javafx.beans.property.SimpleFloatProperty;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
+import javafx.stage.Modality;
+import javafx.stage.Stage;
 import org.tpfinal.Product.Model.Entity.Product;
 import org.tpfinal.Seat.Entity.Seat;
 import org.tpfinal.StockFile.Model.Entity.StockFile;
+import org.tpfinal.Users.Controller.UserSignController;
 
+import java.io.IOException;
 import java.net.URL;
 import java.time.LocalDate;
 import java.util.List;
@@ -113,25 +116,70 @@ public class StockFileController implements Initializable {
 
     @FXML
     void addButtonClicked(MouseEvent event) {
-        // TODO: new scene
-    }
+        try{
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/org/tpfinal/stockFileAdd.fxml"));
+            Parent root = loader.load();
+            StockFileAddController stockFileAddController = loader.getController();
 
-    @FXML
-    void deleteButtonClicked(MouseEvent event) {
-        // TODO: new scene (WARNING WINDOW, [ACCEPT OR DENY])
+            Scene scene = new Scene(root, 600, 600);
+            Stage stage = new Stage();
+            stage.initModality(Modality.APPLICATION_MODAL);
+            stage.setScene(scene);
+            stage.setResizable(false);
+//        stage.setX(1120);
+//        stage.setY(134);
+            stockFileAddController.setCurrentStage(stage);
+            stockFileAddController.setCurrentTableView(tableStockFiles);
+
+            stage.showAndWait();
+        }catch(IOException e){
+            Alert exception = new Alert(Alert.AlertType.ERROR);
+            exception.setHeaderText(null);
+            exception.setTitle("Error");
+            exception.setContentText(e.getMessage());
+            exception.showAndWait();
+        }
     }
 
     @FXML
     void selectFile(MouseEvent event) {
-        // TODO: make it so if you click null, it doesn't register (yate provided a source for that)
-        //      source: https://www.youtube.com/watch?v=SwYczt6K_Q0&list=PLaxZkGlLWHGUWZxuadN3J7KKaICRlhz5-&index=6
         StockFile selectedStockFile = tableStockFiles.getSelectionModel().getSelectedItem();
-        populateBalances(selectedStockFile.getBalance());
+
+        if(selectedStockFile != null){
+            populateBalances(selectedStockFile.getBalance());
+        }
+    }
+
+    @FXML
+    void deleteButtonClicked(MouseEvent event) {
+        // TODO: NEW SCENE (warning, click accept or deny)
     }
 
     @FXML
     void updateButtonClicked(MouseEvent event) {
-        // TODO: new scene
+        try{
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/org/tpfinal/stockFileUpdate.fxml"));
+            Parent root = loader.load();
+            StockFileAddController stockFileAddController = loader.getController();
+
+            Scene scene = new Scene(root, 600, 600);
+            Stage stage = new Stage();
+            stage.initModality(Modality.APPLICATION_MODAL);
+            stage.setScene(scene);
+            stage.setResizable(false);
+//        stage.setX(1120);
+//        stage.setY(134);
+            stockFileAddController.setCurrentStage(stage);
+            stockFileAddController.setCurrentTableView(tableStockFiles);
+
+            stage.showAndWait();
+        }catch(IOException e){
+            Alert exception = new Alert(Alert.AlertType.ERROR);
+            exception.setHeaderText(null);
+            exception.setTitle("Error");
+            exception.setContentText(e.getMessage());
+            exception.showAndWait();
+        }
     }
 
     public void populateStockFiles(){
@@ -141,8 +189,9 @@ public class StockFileController implements Initializable {
     }
 
     public void populateBalances(List<Seat> balances){
-        for (Seat seat : balances){
-            balancesTable.getItems().add(seat);
+        balancesTable.getItems().clear();
+        for(int i = balances.size() - 1; i >= 0; i--){
+            balancesTable.getItems().add(balances.get(i));
         }
     }
 }

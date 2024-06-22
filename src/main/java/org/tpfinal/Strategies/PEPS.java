@@ -48,7 +48,7 @@ public class PEPS implements IntStrategy {
      * @return a new list containing all the Seat movements made to the original list.
      */
     @Override
-    public List<Seat> delete(List<Seat> balance, Integer saleAmount) {
+    public List<Seat> delete(List<Seat> balance, Integer saleAmount) throws ExceedsAvailableException{
         List<Seat> seatReturn = new ArrayList<>();
 
         Iterator<Seat> iterator = balance.iterator();

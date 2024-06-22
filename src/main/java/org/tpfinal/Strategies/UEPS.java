@@ -53,7 +53,7 @@ public class UEPS  implements IntStrategy{
     @Override
     public List<Seat> delete(List<Seat> balance, Integer saleAmount) throws ExceedsAvailableException {
         List<Seat> seatReturn = new ArrayList<>();
-
+        balance = balance.reversed();
         Iterator<Seat> iterator = balance.iterator();
 
         while (iterator.hasNext()){

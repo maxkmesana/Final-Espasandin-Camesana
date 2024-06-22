@@ -16,14 +16,14 @@ public class PPP implements IntStrategy{
         if(balance.isEmpty()){
             balance.add(add);
         }else{
-            Seat first = balance.getFirst();
-            first.setAmount(first.getAmount() + add.getAmount());
-
-            if (first.getAmount() == 0){
+            Seat previous = balance.getFirst();
+            if (previous.getAmount() == 0){
                 throw new DivisionByZeroException();
             }
-            first.setTotalCost(first.getTotalCost() + add.getTotalCost());
-            first.setUnitCost(first.getTotalCost() / first.getUnitCost());
+            Seat result = new Seat(previous.getTotalCost()+add.getTotalCost(),
+                    previous.getAmount()+add.getAmount());
+            balance.remove(previous);
+            balance.add(result);
         }
     }
     @Override
@@ -37,6 +37,8 @@ public class PPP implements IntStrategy{
         toUpdate.setUnitCost(updated.getUnitCost());
     }
 
+
+    // TODO: REFACTOR THIS BULLSHIT!!!!!!!!!! (it doesn't work). Pro tip: logic from this.add()
     @Override
     public List<Seat> delete(List<Seat> balance, Integer saleAmount) throws ExceedsAvailableException {
 

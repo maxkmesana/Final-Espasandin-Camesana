@@ -1,5 +1,6 @@
 package org.tpfinal.StockFile.Model.Entity;
 
+import org.tpfinal.Exception.ExceedsAvailableException;
 import org.tpfinal.Interfaces.IntStrategy;
 import org.tpfinal.Seat.Entity.Seat;
 
@@ -13,7 +14,7 @@ public class StockFile {
     private String activity;
     private Seat purchase;
     private Seat sale;
-    private final List<Seat> balance;
+    private List<Seat> balance;
     private IntStrategy balanceStrategy;
 
     public StockFile(String activity, Seat purchase, Seat sale, IntStrategy balanceStrategy) {
@@ -23,6 +24,15 @@ public class StockFile {
         this.sale = sale;
         this.balanceStrategy = balanceStrategy;
         this.balance = new ArrayList<>();
+    }
+
+    public StockFile(String activity, Seat purchase, Seat sale, List<Seat> balance, IntStrategy balanceStrategy) {
+        this.date = LocalDate.now();
+        this.activity = activity;
+        this.purchase = purchase;
+        this.sale = sale;
+        this.balance = balance;
+        this.balanceStrategy = balanceStrategy;
     }
 
     public LocalDate getDate() {
@@ -61,12 +71,24 @@ public class StockFile {
         return balance;
     }
 
+    public void setBalance(List<Seat> balance) {
+        this.balance = balance;
+    }
+
     public void setBalanceStrategy(IntStrategy balanceStrategy) {
         this.balanceStrategy = balanceStrategy;
     }
 
-    public void addBalance(){
-        balanceStrategy.add(balance, this.purchase);
+    public IntStrategy getBalanceStrategy() {
+        return balanceStrategy;
+    }
+
+    public void addBalancePPP(List<Seat> previousBalance, Seat purchase){
+        balanceStrategy.add(previousBalance, purchase);
+    }
+
+    public void addBalanceForceLast(Seat add){
+        balance.add(add);
     }
 
     public void searchBalance(UUID uuid){
@@ -77,8 +99,8 @@ public class StockFile {
         balanceStrategy.update(toUpdate,updated);
     }
     
-    public void deleteBalance(){
-        balanceStrategy.delete(balance, sale.getAmount());
+    public List<Seat> deleteBalance(){
+       return balanceStrategy.delete(balance, sale.getAmount());
     }
 
     public Float getTotalCostPurchase(){
