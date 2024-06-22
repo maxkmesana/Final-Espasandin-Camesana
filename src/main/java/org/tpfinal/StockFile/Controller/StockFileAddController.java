@@ -16,7 +16,7 @@ import org.tpfinal.Seat.Entity.Seat;
 import org.tpfinal.StockFile.Model.Entity.StockFile;
 import org.tpfinal.Strategies.PEPS;
 import org.tpfinal.Strategies.PPP;
-import org.tpfinal.Strategies.UEPS;
+
 
 import java.net.URL;
 import java.time.LocalDate;
@@ -176,7 +176,6 @@ public class StockFileAddController implements Initializable {
             exception.setContentText(e.getMessage());
             exception.showAndWait();
         }
-
     }
 
     public void purchaseMadePPP(IntStrategy strategy, String activity, Integer unitNumber, Float unitCost){

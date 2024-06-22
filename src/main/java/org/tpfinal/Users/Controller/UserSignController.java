@@ -65,6 +65,7 @@ public class UserSignController implements Initializable {
             throw new EmailTakenException();
         }
         return new User(name, email, username, password);
+
     }
 
     @FXML

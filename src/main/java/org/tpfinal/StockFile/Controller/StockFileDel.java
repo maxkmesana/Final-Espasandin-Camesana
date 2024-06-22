@@ -21,7 +21,7 @@ import java.util.List;
 import java.util.NoSuchElementException;
 import java.util.ResourceBundle;
 
-public class StockFileUpController{
+public class StockFileDel{
 
     @FXML
     private AnchorPane anchor;
@@ -140,16 +140,11 @@ public class StockFileUpController{
 //                normalPurchaseMade(strategy, activity, unitNumber, unitCost);
 
                 break;
-                case "Sale":
-                    currentTable.getItems().remove(currentStockFile);
+            case "Sale":
+                currentTable.getItems().remove(currentStockFile);
 
-                    // AGREGO LO QUE SAQUE ANTES
-                    currentStockFile.getBalance().add(new Seat(unitNumber,unitCost));
-
-                    currentStockFile.getBalance().remove(currentStockFile.getPurchase());
-
-                    normalSaleMade(strategy, activity, unitNumber, unitCost);
-                    break;
+                currentStockFile.setBalance(previousStockFile.getBalance());
+                break;
         }
 
     }

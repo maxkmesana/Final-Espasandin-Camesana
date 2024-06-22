@@ -11,10 +11,11 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
+import org.tpfinal.Exception.EmptyInputException;
+import org.tpfinal.Main;
 import org.tpfinal.Product.Model.Entity.Product;
 import org.tpfinal.Seat.Entity.Seat;
 import org.tpfinal.StockFile.Model.Entity.StockFile;
-import org.tpfinal.Users.Controller.UserSignController;
 
 import java.io.IOException;
 import java.net.URL;
@@ -87,6 +88,7 @@ public class StockFileController implements Initializable {
     @FXML // fx:id="unitCostColumnS"
     private TableColumn<StockFile, Float> unitCostColumnS; // Value injected by FXMLLoader
 
+    private StockFile selectedStockFile;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -110,7 +112,7 @@ public class StockFileController implements Initializable {
         unitCostColumnB.setCellValueFactory(new PropertyValueFactory<Seat, Float>("unitCost"));
         totalCostColumnB.setCellValueFactory(new PropertyValueFactory<Seat, Float>("totalCost"));
 
-
+        btnUpdate.setDisable(true);
         populateStockFiles();
     }
 
@@ -118,6 +120,7 @@ public class StockFileController implements Initializable {
     void addButtonClicked(MouseEvent event) {
         try{
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/org/tpfinal/stockFileAdd.fxml"));
+            System.out.println(getClass().getResource("/org/tpfinal/stockFileAdd.fxml"));
             Parent root = loader.load();
             StockFileAddController stockFileAddController = loader.getController();
 
@@ -132,6 +135,7 @@ public class StockFileController implements Initializable {
             stockFileAddController.setCurrentTableView(tableStockFiles);
 
             stage.showAndWait();
+            btnUpdate.setDisable(tableStockFiles.getItems() == null);
         }catch(IOException e){
             Alert exception = new Alert(Alert.AlertType.ERROR);
             exception.setHeaderText(null);
@@ -143,7 +147,7 @@ public class StockFileController implements Initializable {
 
     @FXML
     void selectFile(MouseEvent event) {
-        StockFile selectedStockFile = tableStockFiles.getSelectionModel().getSelectedItem();
+        selectedStockFile = tableStockFiles.getSelectionModel().getSelectedItem();
 
         if(selectedStockFile != null){
             populateBalances(selectedStockFile.getBalance());
@@ -158,9 +162,9 @@ public class StockFileController implements Initializable {
     @FXML
     void updateButtonClicked(MouseEvent event) {
         try{
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/org/tpfinal/stockFileUpdate.fxml"));
-            Parent root = loader.load();
-            StockFileAddController stockFileAddController = loader.getController();
+            FXMLLoader loader2 = new FXMLLoader(getClass().getResource("/org/tpfinal/stockFileUp.fxml"));
+            Parent root = loader2.load();
+            StockFileUpController stockFileUpController = loader2.getController();
 
             Scene scene = new Scene(root, 600, 600);
             Stage stage = new Stage();
@@ -169,16 +173,31 @@ public class StockFileController implements Initializable {
             stage.setResizable(false);
 //        stage.setX(1120);
 //        stage.setY(134);
-            stockFileAddController.setCurrentStage(stage);
-            stockFileAddController.setCurrentTableView(tableStockFiles);
+            stockFileUpController.setCurrentStage(stage);
 
-            stage.showAndWait();
-        }catch(IOException e){
+            StockFile toUpdate = tableStockFiles.getItems().getLast();
+            if(toUpdate != null){ // TODO: TEST THIS AFTER HAVING DELETELAST
+                stockFileUpController.setCurrentStockFile(toUpdate);
+                stockFileUpController.setCurrentTable(tableStockFiles);
+                stockFileUpController.setPreviousStockFile(previousStockFile());
+                stockFileUpController.initializeAgain();
+                stage.showAndWait();
+            }
+
+        }catch(IOException | EmptyInputException e){
             Alert exception = new Alert(Alert.AlertType.ERROR);
             exception.setHeaderText(null);
             exception.setTitle("Error");
             exception.setContentText(e.getMessage());
             exception.showAndWait();
+        }
+    }
+
+    public StockFile previousStockFile(){
+        try{
+            return tableStockFiles.getItems().get(tableStockFiles.getItems().size()-2);
+        }catch (IndexOutOfBoundsException e){
+            return null;
         }
     }
 
