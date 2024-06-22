@@ -1,10 +1,5 @@
 package org.tpfinal.Product.Model.Entity;
 
-import org.tpfinal.Seat.Entity.Seat;
-import org.tpfinal.StockFile.Model.Entity.StockFile;
-import org.tpfinal.Strategies.UEPS;
-
-import java.time.LocalDate;
 import org.tpfinal.StockFile.Model.Entity.StockFile;
 
 import java.util.LinkedList;
@@ -14,15 +9,21 @@ import java.util.*;
 public class Product {
     private String name;
     private String description;
+    //private String strategy;
     private static List<StockFile> stockFileList;
 
     static {
         stockFileList = new LinkedList<>();
     }
 
+
+
     public Product(String name, String description) {
         this.name = name;
         this.description = description;
+        this.stockFileList = new LinkedList<>();/**
+                                                   check about the collection use, may not be the greater solution.
+                                                */
     }
 
     public String getName() {

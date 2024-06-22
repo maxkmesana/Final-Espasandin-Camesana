@@ -8,17 +8,23 @@ import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import javafx.scene.control.SplitPane;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import org.tpfinal.Product.Controller.ProductController;
 
 import javafx.event.ActionEvent;
+
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
 public class StockManagerLanding implements Initializable {
+    private String currentUsername;
+
+    public void setUsername(String username) {
+        this.username.setText(username);
+        this.currentUsername = username;
+    }
 
     @FXML
     private Button buttonChange;
@@ -40,11 +46,6 @@ public class StockManagerLanding implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-
-    }
-
-    public void setUsername(String username) {
-        this.username.setText(username);
     }
 
     @FXML
@@ -53,6 +54,7 @@ public class StockManagerLanding implements Initializable {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/org/tpfinal/productManagment.fxml"));
             Parent root = loader.load();
             ProductController controller = loader.getController();
+            controller.getUsername(currentUsername);
             Scene scene = new Scene(root, 719, 598);
             Stage stage = new Stage();
             stage.initModality(Modality.APPLICATION_MODAL);

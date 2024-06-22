@@ -6,8 +6,6 @@ import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
-import javafx.scene.input.KeyCode;
-import javafx.scene.input.KeyEvent;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import org.mindrot.jbcrypt.BCrypt;
@@ -84,9 +82,11 @@ public class UserController implements Initializable {
                 Alert exception = new Alert(Alert.AlertType.ERROR);
                 exception.setHeaderText(null);
                 exception.setTitle("Error");
-                exception.setContentText("Invalid username or password.");
+                exception.setContentText("Invalid username or password, try again.");
                 exception.showAndWait();
-            }
+            }/*else if(username == "Admin" && password == "Admin123"){
+
+            }*/
         }
         return null;
     }

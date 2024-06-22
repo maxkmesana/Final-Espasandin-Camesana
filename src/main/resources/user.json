@@ -1,10 +1,29 @@
 {
   "yate": {
-    "id": "856dbc13-8421-4d3e-bd65-8e0496aed523",
+    "id": "ecc5270f-257f-4edd-a98b-072bb076c515",
     "username": "yate",
-    "password": "$2a$10$ENN2TtXKvJW.3wnP0hBLc.W4yuUL5ezPaaGKPI80qcme.y47PLEZe",
+    "password": "$2a$10$BYMwXlWazvdNMFZ0hGtAQO5u6PbvXPc6o5DL7Kqr0Z7TLMCulsaVG",
     "path": "src/main/resources/yate.json",
+    "productSet": [],
     "name": "yate",
-    "email": "yate@gmail.com"
+    "email": "yate"
+  },
+  "yatel": {
+    "id": "e118c4b3-7ef8-423b-b3ce-470029fedf5c",
+    "username": "yatel",
+    "password": "$2a$10$HtAbQF1FtTdTrq2SLGNdxOHavHQv2tgkg6XgM7RFV9LpKLkLftgr.",
+    "path": "src/main/resources/yatel.json",
+    "productSet": [],
+    "name": "yatel",
+    "email": "yatel;"
+  },
+  "caro": {
+    "id": "93b00d37-e86e-41c4-8bc3-bf9b5d558220",
+    "username": "caro",
+    "password": "$2a$10$w6LmXHP2PzYa336EdBfHU.hGQj5Du1uPjbDBBdgZ7Yn3SgnRp/JUC",
+    "path": "src/main/resources/caro.json",
+    "productSet": [],
+    "name": "caro",
+    "email": "fernandezrrios,mc@gmail.com"
   }
 }
