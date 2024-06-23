@@ -43,5 +43,14 @@
     "productSet": [],
     "name": "test",
     "email": "test"
+  },
+  "USERUSER": {
+    "id": "d5a965a3-9973-4768-814a-c6176613242f",
+    "username": "USERUSER",
+    "password": "$2a$10$07mkJzG0KUzpJ.sNTsPpxODmccxVslBNTXQBfmi.4PQ5wL1Wqe.Gu",
+    "path": "src/main/resources/USERUSER.json",
+    "productSet": [],
+    "name": "USEEEEEEER",
+    "email": "EEEEMAAAIL@gmail.com"
   }
 }

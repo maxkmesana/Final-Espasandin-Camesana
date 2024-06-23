@@ -32,7 +32,6 @@ public class StockFileAddController implements Initializable {
     @FXML
     private Button btnSubmit;
 
-
     @FXML
     private ChoiceBox<String> choiceBoxActivity;
 
