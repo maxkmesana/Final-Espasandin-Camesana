@@ -13,7 +13,7 @@ public class Main extends Application {
     public void start(Stage stage) throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("userLogin.fxml"));
         Scene scene = new Scene(fxmlLoader.load());
-        stage.setTitle("Welcome to StockManager");
+        stage.setTitle("Welcome to Vanguard P.I.M.");
         stage.setScene(scene);
         stage.setResizable(false);
 

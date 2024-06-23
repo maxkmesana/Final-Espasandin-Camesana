@@ -21,7 +21,12 @@
             <Button fx:id="buttonExit" layoutX="20.0" layoutY="546.0" mnemonicParsing="false" onAction="#exit" prefHeight="25.0" prefWidth="216.0" text="Exit" />
             <AnchorPane layoutX="257.0" minHeight="0.0" minWidth="0.0" prefHeight="600.0" prefWidth="767.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="257.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                <children>
-                  <Label fx:id="labelLanding" layoutX="119.0" layoutY="242.0" text="Stock Manager">
+                  <Label fx:id="labelLanding" layoutX="201.0" layoutY="209.0" text="Vanguard">
+                     <font>
+                        <Font size="79.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="labelLanding1" alignment="CENTER" layoutX="201.0" layoutY="310.0" prefHeight="20.0" prefWidth="365.0" text="Perpetual Inventory Manager">
                      <font>
                         <Font size="79.0" />
                      </font>
