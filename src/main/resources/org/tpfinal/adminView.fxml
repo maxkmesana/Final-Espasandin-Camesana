@@ -9,7 +9,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="600.0" prefWidth="1024.0" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.tpfinal.Admin.Controller.AdminController">
+<AnchorPane prefHeight="600.0" prefWidth="1024.0" stylesheets="@../../Styles/adminView.css" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.tpfinal.Admin.Controller.AdminController">
    <children>
       <TableView fx:id="userList" layoutX="301.0" layoutY="37.0" onMouseClicked="#selectUser" prefHeight="498.0" prefWidth="651.0">
         <columns>
