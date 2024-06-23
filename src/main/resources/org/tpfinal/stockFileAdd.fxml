@@ -8,7 +8,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane onKeyPressed="#enterPressed" prefHeight="600.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.tpfinal.StockFile.Controller.StockFileAddController">
+<AnchorPane onKeyPressed="#enterPressed" prefHeight="600.0" prefWidth="600.0" stylesheets="@../../Styles/stockFileAdd.css" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.tpfinal.StockFile.Controller.StockFileAddController">
    <children>
       <Label fx:id="labelAddSeat" alignment="CENTER" contentDisplay="CENTER" layoutX="185.0" layoutY="40.0" prefHeight="54.0" prefWidth="230.0" text="Add seat to stock file">
          <font>

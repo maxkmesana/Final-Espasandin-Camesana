@@ -7,24 +7,24 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane fx:id="anchor" prefHeight="600.0" prefWidth="1024.0" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.tpfinal.StockFile.Controller.StockFileController">
+<AnchorPane fx:id="anchor" prefHeight="600.0" prefWidth="1024.0" stylesheets="@../../Styles/stockFile.css" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.tpfinal.StockFile.Controller.StockFileController">
    <children>
-      <TableView fx:id="tableStockFiles" layoutX="38.0" layoutY="73.0" onMouseClicked="#selectFile" prefHeight="389.0" prefWidth="643.0">
+      <TableView fx:id="tableStockFiles" layoutX="38.0" layoutY="73.0" onMouseClicked="#selectFile" prefHeight="389.0" prefWidth="687.0">
          <columns>
             <TableColumn fx:id="dateColumn" editable="false" prefWidth="99.0" sortable="false" text="Date" />
             <TableColumn fx:id="activitiesColumn" editable="false" prefWidth="92.0" sortable="false" text="Activities" />
             <TableColumn fx:id="purchasesColumn" editable="false" minWidth="11.0" prefWidth="210.0" sortable="false" text="Purchases">
                <columns>
                   <TableColumn fx:id="unitColumnP" editable="false" prefWidth="76.0" sortable="false" text="Unit" />
-                  <TableColumn fx:id="unitCostColumnP" editable="false" prefWidth="72.0" sortable="false" text="Unit Cost" />
-                  <TableColumn fx:id="totalCostColumnP" editable="false" prefWidth="77.0" sortable="false" text="Total Cost" />
+                  <TableColumn fx:id="unitCostColumnP" editable="false" prefWidth="76.0" sortable="false" text="Unit Cost" />
+                  <TableColumn fx:id="totalCostColumnP" editable="false" prefWidth="83.0" sortable="false" text="Total Cost" />
                </columns>
             </TableColumn>
             <TableColumn fx:id="sales" editable="false" prefWidth="240.0" sortable="false" text="Sales">
                <columns>
                   <TableColumn fx:id="unitColumnS" editable="false" prefWidth="75.0" sortable="false" text="Unit" />
                   <TableColumn fx:id="unitCostColumnS" editable="false" prefWidth="75.0" sortable="false" text="Unit Cost" />
-                  <TableColumn fx:id="totalCostColumnS" editable="false" prefWidth="75.0" sortable="false" text="Total Cost" />
+                  <TableColumn fx:id="totalCostColumnS" editable="false" prefWidth="82.0" sortable="false" text="Total Cost" />
                </columns>
             </TableColumn>
          </columns>
@@ -32,7 +32,7 @@
             <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
          </columnResizePolicy>
       </TableView>
-      <TableView fx:id="balancesTable" layoutX="739.0" layoutY="73.0" prefHeight="389.0" prefWidth="227.0">
+      <TableView fx:id="balancesTable" layoutX="745.0" layoutY="73.0" prefHeight="389.0" prefWidth="259.0">
         <columns>
           <TableColumn fx:id="balancesColumn" editable="false" prefWidth="226.0" sortable="false" text="Balances">
                <columns>

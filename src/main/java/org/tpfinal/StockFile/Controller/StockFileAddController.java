@@ -202,13 +202,22 @@ public class StockFileAddController implements Initializable {
         Seat saleSeat = new Seat(unitNumber, unitCost);
         StockFile purchaseStockFile = new StockFile(activity,new Seat(),saleSeat,strategy);
         copyPreviousBalances(purchaseStockFile);
-        List <Seat> salesMade = purchaseStockFile.deleteBalance();
+        try{
+            List <Seat> salesMade = purchaseStockFile.deleteBalance();
 
-        for (Seat sale : salesMade){
-            currentTableView.getItems().add(new StockFile(purchaseStockFile.getActivity(),
-                    purchaseStockFile.getPurchase(), new Seat(sale), purchaseStockFile.getBalance(),
-                    purchaseStockFile.getBalanceStrategy()));
+            for (Seat sale : salesMade){
+                currentTableView.getItems().add(new StockFile(purchaseStockFile.getActivity(),
+                        purchaseStockFile.getPurchase(), new Seat(sale), purchaseStockFile.getBalance(),
+                        purchaseStockFile.getBalanceStrategy()));
+            }
+        }catch (ExceedsAvailableException e){
+            Alert exception = new Alert(Alert.AlertType.ERROR);
+            exception.setHeaderText(null);
+            exception.setTitle("Error");
+            exception.setContentText(e.getMessage());
+            exception.showAndWait();
         }
+
     }
 
     public void purchaseMade(IntStrategy strategy, String activity, Integer unitNumber, Float unitCost){
@@ -223,12 +232,20 @@ public class StockFileAddController implements Initializable {
         Seat saleSeat = new Seat(unitNumber, unitCost);
         StockFile purchaseStockFile = new StockFile(activity,new Seat(),saleSeat,strategy);
         copyPreviousBalances(purchaseStockFile);
-        List <Seat> salesMade = purchaseStockFile.deleteBalance();
+        try{
+            List <Seat> salesMade = purchaseStockFile.deleteBalance();
 
-        for (Seat sale : salesMade){
-            currentTableView.getItems().add(new StockFile(purchaseStockFile.getActivity(),
-                    purchaseStockFile.getPurchase(), new Seat(sale), purchaseStockFile.getBalance(),
-                    purchaseStockFile.getBalanceStrategy()));
+            for (Seat sale : salesMade){
+                currentTableView.getItems().add(new StockFile(purchaseStockFile.getActivity(),
+                        purchaseStockFile.getPurchase(), new Seat(sale), purchaseStockFile.getBalance(),
+                        purchaseStockFile.getBalanceStrategy()));
+            }
+        }catch (ExceedsAvailableException e){
+            Alert exception = new Alert(Alert.AlertType.ERROR);
+            exception.setHeaderText(null);
+            exception.setTitle("Error");
+            exception.setContentText(e.getMessage());
+            exception.showAndWait();
         }
     }
 
