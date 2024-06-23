@@ -25,5 +25,23 @@
     "productSet": [],
     "name": "caro",
     "email": "fernandezrrios,mc@gmail.com"
+  },
+  "pepito": {
+    "id": "df86e8c9-a295-4423-9c80-9b1bbb5f3baa",
+    "username": "pepito",
+    "password": "$2a$10$JpqgsBUAmhMuh2G3CpmIMO.EXdqVs.LRPaZOoI9HINye5nQEf492u",
+    "path": "src/main/resources/pepito.json",
+    "productSet": [],
+    "name": "pepe",
+    "email": "pepe"
+  },
+  "test": {
+    "id": "f29cbba2-dde5-4260-a2b7-036d558ef92d",
+    "username": "test",
+    "password": "$2a$10$TZMzc2fkhpVpW40uFmH5Eu7Z7igpFe4BYdbifyUCLqKrW3dq6QoNm",
+    "path": "src/main/resources/test.json",
+    "productSet": [],
+    "name": "test",
+    "email": "test"
   }
 }

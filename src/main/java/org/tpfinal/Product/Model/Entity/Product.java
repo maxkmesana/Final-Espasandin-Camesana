@@ -1,5 +1,6 @@
 package org.tpfinal.Product.Model.Entity;
 
+import org.tpfinal.Interfaces.IntStrategy;
 import org.tpfinal.StockFile.Model.Entity.StockFile;
 
 import java.util.LinkedList;
@@ -9,7 +10,7 @@ import java.util.*;
 public class Product {
     private String name;
     private String description;
-    //private String strategy;
+    private IntStrategy strategy;
     private static List<StockFile> stockFileList;
 
     static {
@@ -18,12 +19,10 @@ public class Product {
 
 
 
-    public Product(String name, String description) {
+    public Product(String name, String description, IntStrategy strategy) {
         this.name = name;
         this.description = description;
-        this.stockFileList = new LinkedList<>();/**
-                                                   check about the collection use, may not be the greater solution.
-                                                */
+        this.strategy = strategy;
     }
 
     public String getName() {
@@ -53,6 +52,10 @@ public class Product {
         if (o == null || getClass() != o.getClass()) return false;
         Product product = (Product) o;
         return Objects.equals(name, product.name);
+    }
+
+    public IntStrategy getStrategy() {
+        return strategy;
     }
 
     @Override

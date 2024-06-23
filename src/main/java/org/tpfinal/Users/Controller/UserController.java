@@ -6,6 +6,8 @@ import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.scene.input.KeyEvent;
+import javafx.scene.input.MouseEvent;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import org.mindrot.jbcrypt.BCrypt;
@@ -92,7 +94,16 @@ public class UserController implements Initializable {
     }
 
     @FXML
-    public void userLogin(ActionEvent event) {
+    public void userLogin(MouseEvent event) {
+        login();
+    }
+
+    @FXML
+    void enterPressedLogin(KeyEvent event) {
+        login();
+    }
+
+    public void login(){
         try {
             User newUserLogin = userLoginLogic();
         } catch (EmptyFieldException e) {

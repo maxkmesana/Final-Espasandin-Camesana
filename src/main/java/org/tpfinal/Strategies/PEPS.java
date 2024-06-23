@@ -52,9 +52,6 @@ public class PEPS implements IntStrategy {
         List<Seat> seatReturn = new ArrayList<>();
 
         Iterator<Seat> iterator = balance.iterator();
-        for(int i = balance.size() - 1; i >= 0; i--){
-            System.out.println(balance.get(i).getAmount()+ " : " + balance.get(i).getUnitCost() + " : " + balance.get(i).getTotalCost());
-        }
         if(saleAmount > getTotalUnits(balance)){
             throw new ExceedsAvailableException();
         }

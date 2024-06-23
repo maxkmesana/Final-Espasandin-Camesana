@@ -1,0 +1,64 @@
+
+* {
+    -fx-font-family: 'Arial', sans-serif;
+}
+
+AnchorPane {
+    -fx-background-color: #2e2e2e;
+}
+
+
+Label {
+    -fx-text-fill: #ffffff;
+    -fx-font-size: 16px;
+    -fx-font-weight: bold;
+}
+
+Label#label {
+    -fx-font-size: 18px;
+}
+
+Label {
+    -fx-font-size: 13px;
+}
+
+
+TextField, PasswordField {
+    -fx-background-color: #3e3e3e;
+    -fx-text-fill: #ffffff;
+    -fx-prompt-text-fill: #aaaaaa;
+    -fx-border-color: #505050;
+    -fx-border-radius: 5px;
+    -fx-background-radius: 5px;
+    -fx-padding: 5px;
+}
+
+
+Button {
+    -fx-background-color: #5c5c5c;
+    -fx-text-fill: #ffffff;
+    -fx-background-radius: 5px;
+    -fx-border-radius: 5px;
+    -fx-padding: 5px 10px;
+    -fx-cursor: hand;
+}
+
+Button:hover {
+    -fx-background-color: #777777;
+}
+
+Button:pressed {
+    -fx-background-color: #444444;
+}
+
+Button#button {
+    -fx-background-color: #4CAF50;
+}
+
+Button#button:hover {
+    -fx-background-color: #45A049;
+}
+
+Button#button:pressed {
+    -fx-background-color: #388E3C;
+}

@@ -6,7 +6,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="1024.0" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.tpfinal.StockManagerLanding">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="1024.0" stylesheets="@../../Styles/stockManagerLanding.css" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.tpfinal.StockManagerLanding">
    <children>
       <AnchorPane fx:id="menuAnchor" layoutX="10.0" layoutY="10.0" minHeight="0.0" minWidth="0.0" prefHeight="600.0" prefWidth="1024.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
@@ -19,7 +19,6 @@
             <Button fx:id="buttonManagment" layoutX="20.0" layoutY="121.0" mnemonicParsing="false" onAction="#switchToProdManagment" prefHeight="25.0" prefWidth="216.0" text="Product managment" />
             <Button fx:id="buttonChange" layoutX="20.0" layoutY="500.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="216.0" text="Change User" />
             <Button fx:id="buttonExit" layoutX="20.0" layoutY="546.0" mnemonicParsing="false" onAction="#exit" prefHeight="25.0" prefWidth="216.0" text="Exit" />
-            <Button fx:id="buttonManagment1" layoutX="21.0" layoutY="180.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="216.0" text="Stock managment" />
             <AnchorPane layoutX="257.0" minHeight="0.0" minWidth="0.0" prefHeight="600.0" prefWidth="767.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="257.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                <children>
                   <Label fx:id="labelLanding" layoutX="119.0" layoutY="242.0" text="Stock Manager">

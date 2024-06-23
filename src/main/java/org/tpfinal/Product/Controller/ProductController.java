@@ -3,19 +3,29 @@ package org.tpfinal.Product.Controller;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableSet;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
 import org.tpfinal.Exception.EmptyFieldException;
+import org.tpfinal.Interfaces.IntStrategy;
 import org.tpfinal.Product.Model.Entity.Product;
 import org.tpfinal.Product.Model.Repository.ProductRepository;
 import javafx.event.ActionEvent;
+import org.tpfinal.StockFile.Controller.StockFileController;
+import org.tpfinal.Strategies.PEPS;
+import org.tpfinal.Strategies.PPP;
+import org.tpfinal.Strategies.UEPS;
 import org.tpfinal.Users.Model.Entity.User;
 import org.tpfinal.Users.Model.Repository.UserRepository;
 
+import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
@@ -55,6 +65,19 @@ public class ProductController implements Initializable {
 
     private ObservableSet<Product> filteredSet;
 
+    @FXML
+    private ChoiceBox<IntStrategy> systemChoiceBox;
+
+    @FXML
+    private Label systemLabel;
+
+    @FXML
+    private Button stockManagementButton;
+
+    private Product selected;
+
+    private Stage currentStage;
+
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         userRepository = new UserRepository();
@@ -63,6 +86,8 @@ public class ProductController implements Initializable {
         this.descriptColumn.setCellValueFactory(new PropertyValueFactory<>("description"));
         filteredSet = FXCollections.observableSet();
         this.setList.setItems(FXCollections.observableArrayList(ProductRepository.getProductSet()));
+
+        this.systemChoiceBox.getItems().addAll(new UEPS(), new PEPS(), new PPP());
     }
 
     public User currentUserUsage(){
@@ -73,10 +98,11 @@ public class ProductController implements Initializable {
     public Product createProduct() throws EmptyFieldException {
         String name = this.nameField.getText();
         String description = this.descripField.getText();
-        if(name.isEmpty() || description.isEmpty()){
+        IntStrategy strategy = this.systemChoiceBox.getSelectionModel().getSelectedItem();
+        if(name.isEmpty() || description.isEmpty() || strategy == null){
             throw new EmptyFieldException();
         }else{
-            return new Product(name, description);
+            return new Product(name, description,strategy);
         }
     }
 
@@ -118,10 +144,37 @@ public class ProductController implements Initializable {
 
     @FXML
     public void selectProduct(MouseEvent event){
-        Product selected = this.setList.getSelectionModel().getSelectedItem();
+        selected = this.setList.getSelectionModel().getSelectedItem();
         if(selected!=null){
             this.nameField.setText(selected.getName());
             this.descripField.setText(selected.getDescription());
+            this.stockManagementButton.setDisable(false);
+        }else{
+            stockManagementButton.setDisable(true);
+        }
+    }
+
+    @FXML
+    public void stockManagementClicked(MouseEvent event){
+        if(selected != null){
+            try{
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("/org/tpfinal/stockFile.fxml"));
+                Parent root = loader.load();
+                StockFileController controller = loader.getController();
+                Scene scene = new Scene(root);
+                Stage stage = new Stage();
+                stage.initModality(Modality.APPLICATION_MODAL);
+                stage.setScene(scene);
+                stage.setResizable(false);
+                controller.setParentProduct(selected);
+                stage.showAndWait();
+            }catch(IOException e){
+                Alert exception = new Alert(Alert.AlertType.ERROR);
+                exception.setHeaderText(null);
+                exception.setTitle("Error");
+                exception.setContentText(e.getMessage());
+                exception.showAndWait();
+            }
         }
     }
 
@@ -184,6 +237,14 @@ public class ProductController implements Initializable {
         exception.setTitle("Error");
         exception.setContentText(message);
         exception.showAndWait();
+    }
+
+    public Stage getCurrentStage() {
+        return currentStage;
+    }
+
+    public void setCurrentStage(Stage currentStage) {
+        this.currentStage = currentStage;
     }
 }
 

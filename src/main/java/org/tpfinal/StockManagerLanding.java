@@ -36,9 +36,6 @@ public class StockManagerLanding implements Initializable {
     private Button buttonManagment;
 
     @FXML
-    private Button buttonManagment1;
-
-    @FXML
     private Label labelLanding;
 
     @FXML
@@ -55,11 +52,12 @@ public class StockManagerLanding implements Initializable {
             Parent root = loader.load();
             ProductController controller = loader.getController();
             controller.getUsername(currentUsername);
-            Scene scene = new Scene(root, 719, 598);
+            Scene scene = new Scene(root);
             Stage stage = new Stage();
             stage.initModality(Modality.APPLICATION_MODAL);
             stage.setScene(scene);
             stage.setResizable(false);
+            controller.setCurrentStage(stage);
             stage.show();
         }catch(IOException e){
             Alert exception = new Alert(Alert.AlertType.ERROR);

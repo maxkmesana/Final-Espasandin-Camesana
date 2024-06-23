@@ -37,11 +37,10 @@ public class PPP implements IntStrategy{
         toUpdate.setUnitCost(updated.getUnitCost());
     }
 
-
-    // TODO: REFACTOR THIS BULLSHIT!!!!!!!!!! (it doesn't work). Pro tip: logic from this.add()
     @Override
     public List<Seat> delete(List<Seat> balance, Integer saleAmount) throws ExceedsAvailableException {
 
+        // TODO: descontar saleAmount a first. Aniadir a respuesta (RECALCULAR TOTALCOST). Retornar respuesta
         List<Seat> seatReturn = new ArrayList<>();
         Seat first = balance.getFirst();
 

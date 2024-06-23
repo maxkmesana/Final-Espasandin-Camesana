@@ -12,10 +12,12 @@ import org.tpfinal.Exception.EmptyInputException;
 import org.tpfinal.Exception.ExceedsAvailableException;
 import org.tpfinal.Exception.InvalidNumberInputException;
 import org.tpfinal.Interfaces.IntStrategy;
+import org.tpfinal.Product.Model.Entity.Product;
 import org.tpfinal.Seat.Entity.Seat;
 import org.tpfinal.StockFile.Model.Entity.StockFile;
 import org.tpfinal.Strategies.PEPS;
 import org.tpfinal.Strategies.PPP;
+import org.tpfinal.Strategies.UEPS;
 
 
 import java.net.URL;
@@ -62,8 +64,12 @@ public class StockFileAddController implements Initializable {
     private TextField txtFieldUnitCost;
 
     private Stage currentStage;
+    private StockFile previousPPP;
 
     private TableView<StockFile> currentTableView;
+    private Product parentProduct;
+
+    private IntStrategy strategy;
 
     public void initialize(URL url, ResourceBundle resourceBundle) {
         choiceBoxActivity.getItems().addAll("Purchase", "Sale");
@@ -119,14 +125,14 @@ public class StockFileAddController implements Initializable {
     public void disableUnitCost(String newValue){
         if(newValue.equals("Sale")){
             txtFieldUnitCost.setDisable(true);
+            txtFieldUnitCost.clear();
+            txtFieldUnitCost.setText("0");
         }else{
             txtFieldUnitCost.setDisable(false);
         }
     }
 
     public void submit() throws EmptyInputException, InvalidNumberInputException {
-        // TODO: CAMBIAR OBJETO UEPS POR EL OBJETO DEL PRODUCTO.
-        IntStrategy strategy = new PEPS();
         String activity = choiceBoxActivity.getSelectionModel().getSelectedItem();
         String checkUnitNumber = txtFieldUnitNumber.getText();
         String checkUnitCost = txtFieldUnitCost.getText();
@@ -184,20 +190,25 @@ public class StockFileAddController implements Initializable {
 
         copyPreviousBalances(purchaseStockFile);
 
+        previousPPP = new StockFile(activity, purchaseStockFile.getPurchase(),
+                new Seat(), purchaseStockFile.getBalance(), strategy);
+
         purchaseStockFile.addBalancePPP(purchaseStockFile.getBalance(), purchaseSeat);
 
         currentTableView.getItems().add(purchaseStockFile);
     }
 
     public void saleMadePPP(IntStrategy strategy, String activity, Integer unitNumber, Float unitCost){
-        Seat purchaseSeat = new Seat(unitNumber, unitCost);
-        StockFile purchaseStockFile = new StockFile(activity,purchaseSeat,new Seat(),strategy);
-
+        Seat saleSeat = new Seat(unitNumber, unitCost);
+        StockFile purchaseStockFile = new StockFile(activity,new Seat(),saleSeat,strategy);
         copyPreviousBalances(purchaseStockFile);
+        List <Seat> salesMade = purchaseStockFile.deleteBalance();
 
-        purchaseStockFile.deleteBalance();
-
-        currentTableView.getItems().add(purchaseStockFile);
+        for (Seat sale : salesMade){
+            currentTableView.getItems().add(new StockFile(purchaseStockFile.getActivity(),
+                    purchaseStockFile.getPurchase(), new Seat(sale), purchaseStockFile.getBalance(),
+                    purchaseStockFile.getBalanceStrategy()));
+        }
     }
 
     public void purchaseMade(IntStrategy strategy, String activity, Integer unitNumber, Float unitCost){
@@ -231,4 +242,11 @@ public class StockFileAddController implements Initializable {
         }
     }
 
+    public StockFile getPreviousPPP() {
+        return previousPPP;
+    }
+
+    public void setStrategy(Product parentProduct) {
+        this.strategy = parentProduct.getStrategy();
+    }
 }

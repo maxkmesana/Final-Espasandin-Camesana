@@ -11,16 +11,16 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
-import org.tpfinal.Exception.EmptyInputException;
-import org.tpfinal.Main;
 import org.tpfinal.Product.Model.Entity.Product;
 import org.tpfinal.Seat.Entity.Seat;
 import org.tpfinal.StockFile.Model.Entity.StockFile;
+import org.tpfinal.Strategies.PPP;
 
 import java.io.IOException;
 import java.net.URL;
 import java.time.LocalDate;
 import java.util.List;
+import java.util.NoSuchElementException;
 import java.util.ResourceBundle;
 
 public class StockFileController implements Initializable {
@@ -43,8 +43,6 @@ public class StockFileController implements Initializable {
     @FXML // fx:id="btnDelete"
     private Button btnDelete; // Value injected by FXMLLoader
 
-    @FXML // fx:id="btnUpdate"
-    private Button btnUpdate; // Value injected by FXMLLoader
 
     @FXML // fx:id="dateColumn"
     private TableColumn<StockFile, LocalDate> dateColumn; // Value injected by FXMLLoader
@@ -90,29 +88,32 @@ public class StockFileController implements Initializable {
 
     private StockFile selectedStockFile;
 
+    private StockFileAddController stockFileAddController;
+
+    private Product parentProduct;
+
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        activitiesColumn.setCellValueFactory(new PropertyValueFactory<StockFile, String>("activity"));
-        dateColumn.setCellValueFactory(new PropertyValueFactory<StockFile, LocalDate>("date"));
-        balancesColumn.setCellValueFactory(new PropertyValueFactory<StockFile, List<Seat>>("balance"));
-        purchasesColumn.setCellValueFactory(new PropertyValueFactory<StockFile, Seat>("purchase"));
-        sales.setCellValueFactory(new PropertyValueFactory<StockFile, Seat>("sale"));
+        activitiesColumn.setCellValueFactory(new PropertyValueFactory<>("activity"));
+        dateColumn.setCellValueFactory(new PropertyValueFactory<>("date"));
+        balancesColumn.setCellValueFactory(new PropertyValueFactory<>("balance"));
+        purchasesColumn.setCellValueFactory(new PropertyValueFactory<>("purchase"));
+        sales.setCellValueFactory(new PropertyValueFactory<>("sale"));
 
-        totalCostColumnP.setCellValueFactory(new PropertyValueFactory<StockFile, Float>("totalCostPurchase"));
-        totalCostColumnS.setCellValueFactory(new PropertyValueFactory<StockFile, Float>("totalCostSale"));
+        totalCostColumnP.setCellValueFactory(new PropertyValueFactory<>("totalCostPurchase"));
+        totalCostColumnS.setCellValueFactory(new PropertyValueFactory<>("totalCostSale"));
 
-        unitColumnP.setCellValueFactory(new PropertyValueFactory<StockFile, Integer>("unitPurchase"));
-        unitColumnS.setCellValueFactory(new PropertyValueFactory<StockFile, Integer>("unitSale"));
+        unitColumnP.setCellValueFactory(new PropertyValueFactory<>("unitPurchase"));
+        unitColumnS.setCellValueFactory(new PropertyValueFactory<>("unitSale"));
 
-        unitCostColumnP.setCellValueFactory(new PropertyValueFactory<StockFile, Float>("unitCostPurchase"));
-        unitCostColumnS.setCellValueFactory(new PropertyValueFactory<StockFile, Float>("unitCostSale"));
+        unitCostColumnP.setCellValueFactory(new PropertyValueFactory<>("unitCostPurchase"));
+        unitCostColumnS.setCellValueFactory(new PropertyValueFactory<>("unitCostSale"));
 
 
-        unitColumnB.setCellValueFactory(new PropertyValueFactory<Seat, Integer>("amount"));
-        unitCostColumnB.setCellValueFactory(new PropertyValueFactory<Seat, Float>("unitCost"));
-        totalCostColumnB.setCellValueFactory(new PropertyValueFactory<Seat, Float>("totalCost"));
+        unitColumnB.setCellValueFactory(new PropertyValueFactory<>("amount"));
+        unitCostColumnB.setCellValueFactory(new PropertyValueFactory<>("unitCost"));
+        totalCostColumnB.setCellValueFactory(new PropertyValueFactory<>("totalCost"));
 
-        btnUpdate.setDisable(true);
         populateStockFiles();
     }
 
@@ -120,22 +121,19 @@ public class StockFileController implements Initializable {
     void addButtonClicked(MouseEvent event) {
         try{
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/org/tpfinal/stockFileAdd.fxml"));
-            System.out.println(getClass().getResource("/org/tpfinal/stockFileAdd.fxml"));
             Parent root = loader.load();
-            StockFileAddController stockFileAddController = loader.getController();
+            stockFileAddController = loader.getController();
 
             Scene scene = new Scene(root, 600, 600);
             Stage stage = new Stage();
             stage.initModality(Modality.APPLICATION_MODAL);
             stage.setScene(scene);
             stage.setResizable(false);
-//        stage.setX(1120);
-//        stage.setY(134);
             stockFileAddController.setCurrentStage(stage);
             stockFileAddController.setCurrentTableView(tableStockFiles);
+            stockFileAddController.setStrategy(parentProduct);
 
             stage.showAndWait();
-            btnUpdate.setDisable(tableStockFiles.getItems() == null);
         }catch(IOException e){
             Alert exception = new Alert(Alert.AlertType.ERROR);
             exception.setHeaderText(null);
@@ -156,49 +154,48 @@ public class StockFileController implements Initializable {
 
     @FXML
     void deleteButtonClicked(MouseEvent event) {
-        // TODO: NEW SCENE (warning, click accept or deny)
-    }
 
-    @FXML
-    void updateButtonClicked(MouseEvent event) {
         try{
-            FXMLLoader loader2 = new FXMLLoader(getClass().getResource("/org/tpfinal/stockFileUp.fxml"));
-            Parent root = loader2.load();
-            StockFileUpController stockFileUpController = loader2.getController();
+            StockFile last = tableStockFiles.getItems().getLast();
 
-            Scene scene = new Scene(root, 600, 600);
-            Stage stage = new Stage();
-            stage.initModality(Modality.APPLICATION_MODAL);
-            stage.setScene(scene);
-            stage.setResizable(false);
-//        stage.setX(1120);
-//        stage.setY(134);
-            stockFileUpController.setCurrentStage(stage);
-
-            StockFile toUpdate = tableStockFiles.getItems().getLast();
-            if(toUpdate != null){ // TODO: TEST THIS AFTER HAVING DELETELAST
-                stockFileUpController.setCurrentStockFile(toUpdate);
-                stockFileUpController.setCurrentTable(tableStockFiles);
-                stockFileUpController.setPreviousStockFile(previousStockFile());
-                stockFileUpController.initializeAgain();
-                stage.showAndWait();
+            if(last != null){
+                if (last.getBalanceStrategy() instanceof PPP){
+                    deletePppRedirect(last);
+                    return;
+                }
+                switch(last.getActivity()){
+                    case "Purchase":
+                        last.getBalance().remove(last.getPurchase());
+                        tableStockFiles.getItems().remove(last);
+                        break;
+                    case "Sale":
+                        tableStockFiles.getItems().remove(last);
+                        break;
+                }
             }
-
-        }catch(IOException | EmptyInputException e){
+        }catch (NoSuchElementException e){
             Alert exception = new Alert(Alert.AlertType.ERROR);
             exception.setHeaderText(null);
             exception.setTitle("Error");
-            exception.setContentText(e.getMessage());
+            exception.setContentText("There are no elements to be deleted.");
             exception.showAndWait();
         }
     }
 
-    public StockFile previousStockFile(){
-        try{
-            return tableStockFiles.getItems().get(tableStockFiles.getItems().size()-2);
-        }catch (IndexOutOfBoundsException e){
-            return null;
+    public void deletePppRedirect(StockFile currentStockFile){
+        currentStockFile = stockFileAddController.getPreviousPPP();
+        tableStockFiles.getItems().remove(tableStockFiles.getItems().getLast());
+    }
+
+    public StockFile previousStockFile(StockFile currentStockFile){
+        StockFile previous = tableStockFiles.getItems().getFirst();
+        for (StockFile stockFile : tableStockFiles.getItems()){
+            if(previous.equals(stockFile)){
+                return previous;
+            }
+            previous = stockFile;
         }
+        return previous;
     }
 
     public void populateStockFiles(){
@@ -212,5 +209,14 @@ public class StockFileController implements Initializable {
         for(int i = balances.size() - 1; i >= 0; i--){
             balancesTable.getItems().add(balances.get(i));
         }
+    }
+
+    public Product getParentProduct() {
+        return parentProduct;
+    }
+
+    public void setParentProduct(Product parentProduct) {
+        this.parentProduct = parentProduct;
+        labelProdName.setText(parentProduct.getName() + ": " + parentProduct.getStrategy().toString());
     }
 }

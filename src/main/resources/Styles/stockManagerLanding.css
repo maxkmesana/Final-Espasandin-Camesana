@@ -1,0 +1,59 @@
+
+* {
+    -fx-font-family: 'Arial', sans-serif;
+}
+
+AnchorPane {
+    -fx-background-color: #2e2e2e;
+}
+
+
+Label {
+    -fx-text-fill: #ffffff;
+    -fx-font-size: 16px;
+    -fx-font-weight: bold;
+}
+
+Label#username {
+    -fx-font-size: 34px;
+}
+
+Label#labelLanding {
+    -fx-font-size: 79px;
+}
+
+
+Separator {
+    -fx-background-color: #505050;
+}
+
+
+Button {
+    -fx-background-color: #5c5c5c;
+    -fx-text-fill: #ffffff;
+    -fx-background-radius: 5px;
+    -fx-border-radius: 5px;
+    -fx-padding: 5px 10px;
+    -fx-cursor: hand;
+}
+
+Button:hover {
+    -fx-background-color: #777777;
+}
+
+Button:pressed {
+    -fx-background-color: #444444;
+}
+
+
+Button#buttonManagment, Button#buttonChange, Button#buttonExit {
+    -fx-background-color: #4CAF50;
+}
+
+Button#buttonManagment:hover, Button#buttonChange:hover, Button#buttonExit:hover {
+    -fx-background-color: #45A049;
+}
+
+Button#buttonManagment:pressed, Button#buttonChange:pressed, Button#buttonExit:pressed {
+    -fx-background-color: #388E3C;
+}
