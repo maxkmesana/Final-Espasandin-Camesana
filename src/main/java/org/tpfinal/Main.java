@@ -2,10 +2,9 @@ package org.tpfinal;
 
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
-import org.tpfinal.Product.Model.Entity.Product;
+
 
 import java.io.IOException;
 

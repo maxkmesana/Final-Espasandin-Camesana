@@ -17,7 +17,6 @@ public class User extends Person {
     private UUID id;
     private String username;
     private String password;
-    private String path;
     private Set<Product> productSet;
 
     public User(String name, String email, String username, String password) {
@@ -25,7 +24,6 @@ public class User extends Person {
         this.id = UUID.randomUUID();
         this.username = username;
         this.password = BCrypt.hashpw(password, BCrypt.gensalt());
-        this.path = "src/main/resources/" + username + ".json";
         this.productSet = new HashSet<>();
     }
 
@@ -46,11 +44,6 @@ public class User extends Person {
     public String getPassword() {
         return password;
     }
-
-    public String getPath() {
-        return path;
-    }
-
 
     public Set<Product> getProductSet() {
         return productSet;

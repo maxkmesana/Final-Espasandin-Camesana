@@ -82,4 +82,8 @@ public class UserRepository{
         return false;
     }
 
+    public void remove(User remove){
+        userMap.remove(remove.getUsername(), remove);
+    }
+
 }
