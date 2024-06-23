@@ -1,0 +1,70 @@
+
+* {
+    -fx-font-family: 'Arial', sans-serif;
+}
+
+AnchorPane {
+    -fx-background-color: #2e2e2e;
+}
+
+
+Label {
+    -fx-text-fill: #ffffff;
+    -fx-font-size: 16px;
+    -fx-font-weight: bold;
+}
+
+Label[layoutX="90.0"] {
+    -fx-font-size: 13px;
+}
+
+Label#labelAddSeat {
+    -fx-font-size: 15px;
+}
+
+TextField, ChoiceBox {
+    -fx-background-color: #3e3e3e;
+    -fx-text-fill: #ffffff;
+    -fx-prompt-text-fill: #aaaaaa;
+    -fx-border-color: #505050;
+    -fx-border-radius: 5px;
+    -fx-background-radius: 5px;
+    -fx-padding: 5px;
+}
+
+.choice-box .menu-item > .label {
+    -fx-text-fill: white;
+}
+
+.choice-box .context-menu {
+    -fx-background-color: #3e3e3e;
+}
+
+Button {
+    -fx-background-color: #5c5c5c;
+    -fx-text-fill: #ffffff;
+    -fx-background-radius: 5px;
+    -fx-border-radius: 5px;
+    -fx-padding: 5px 10px;
+    -fx-cursor: hand;
+}
+
+Button:hover {
+    -fx-background-color: #777777;
+}
+
+Button:pressed {
+    -fx-background-color: #444444;
+}
+
+Button#btnSubmit, Button#btnBack {
+    -fx-background-color: #4CAF50;
+}
+
+Button#btnSubmit:hover, Button#btnBack:hover {
+    -fx-background-color: #45A049;
+}
+
+Button#btnSubmit:pressed, Button#btnBack:pressed {
+    -fx-background-color: #388E3C;
+}

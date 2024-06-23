@@ -29,14 +29,14 @@
       <Label fx:id="nameLabel" layoutX="55.0" layoutY="132.0" text="Name" />
       <Label fx:id="descrpLabel" layoutX="8.0" layoutY="222.0" text="Description" />
       <TextField fx:id="filterField" layoutX="501.0" layoutY="66.0" onKeyReleased="#filterProducts" prefHeight="25.0" prefWidth="189.0" />
-      <Label layoutX="405.0" layoutY="70.0" text="Filter by name" />
+      <Label layoutX="386.0" layoutY="66.0" text="Filter by name" />
       <Label layoutX="35.0" layoutY="40.0" text="Product Managment">
          <font>
             <Font name="System Bold" size="20.0" />
          </font>
       </Label>
       <Button fx:id="stockManagementButton" disable="true" layoutX="26.0" layoutY="433.0" mnemonicParsing="false" onMouseClicked="#stockManagementClicked" prefHeight="25.0" prefWidth="272.0" text="Go to product's stock manager" />
-      <Label fx:id="systemLabel" layoutX="37.0" layoutY="175.0" text="System" />
-      <ChoiceBox fx:id="systemChoiceBox" layoutX="106.0" layoutY="180.0" prefHeight="25.0" prefWidth="189.0" />
+      <Label fx:id="systemLabel" layoutX="39.0" layoutY="174.0" text="System" />
+      <ChoiceBox fx:id="systemChoiceBox" layoutX="106.0" layoutY="174.0" prefHeight="25.0" prefWidth="189.0" />
    </children>
 </AnchorPane>

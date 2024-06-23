@@ -7,6 +7,7 @@ import org.tpfinal.Seat.Entity.Seat;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.NoSuchElementException;
 import java.util.UUID;
 
 public class PPP implements IntStrategy{
@@ -40,18 +41,21 @@ public class PPP implements IntStrategy{
     @Override
     public List<Seat> delete(List<Seat> balance, Integer saleAmount) throws ExceedsAvailableException {
 
-        // TODO: descontar saleAmount a first. Aniadir a respuesta (RECALCULAR TOTALCOST). Retornar respuesta
         List<Seat> seatReturn = new ArrayList<>();
-        Seat first = balance.getFirst();
+        try{
+            Seat first = balance.getFirst();
 
-        first.setAmount(first.getAmount() - saleAmount);
-        if (first.getAmount() < 0){
+            first.setAmount(first.getAmount() - saleAmount);
+            if (first.getAmount() < 0){
+                throw new ExceedsAvailableException();
+            }
+            seatReturn.add(new Seat(saleAmount, first.getUnitCost()));
+            first.setTotalCost(first.getAmount() * first.getUnitCost());
+
+            return seatReturn;
+        }catch (NoSuchElementException e){
             throw new ExceedsAvailableException();
         }
-        seatReturn.add(new Seat(saleAmount, first.getUnitCost()));
-        first.setTotalCost(first.getAmount() * first.getUnitCost());
-
-        return seatReturn;
     }
 
     public String toString(){
