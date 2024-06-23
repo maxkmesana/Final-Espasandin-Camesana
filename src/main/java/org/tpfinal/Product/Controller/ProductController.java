@@ -19,6 +19,7 @@ import org.tpfinal.Product.Model.Entity.Product;
 import org.tpfinal.Product.Model.Repository.ProductRepository;
 import javafx.event.ActionEvent;
 import org.tpfinal.StockFile.Controller.StockFileController;
+import org.tpfinal.StockFile.Model.Entity.StockFile;
 import org.tpfinal.Strategies.PEPS;
 import org.tpfinal.Strategies.PPP;
 import org.tpfinal.Strategies.UEPS;
@@ -31,6 +32,9 @@ import java.util.ResourceBundle;
 
 public class ProductController implements Initializable {
     private ProductRepository productRepository;
+
+
+
     private UserRepository userRepository;
 
     private String currentUsername;
@@ -80,7 +84,7 @@ public class ProductController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        userRepository = new UserRepository();
+//        userRepository = new UserRepository(); // YATE TE VEO Y TE PEGO UN TIRO. BASTA DE CREAR USER REPOSITORIES. BASTA
         productRepository = new ProductRepository();
         this.nameColumn.setCellValueFactory(new PropertyValueFactory<>("name"));
         this.descriptColumn.setCellValueFactory(new PropertyValueFactory<>("description"));
@@ -89,8 +93,16 @@ public class ProductController implements Initializable {
         this.systemChoiceBox.getItems().addAll(new UEPS(), new PEPS(), new PPP());
     }
 
+    public UserRepository getUserRepository() {
+        return userRepository;
+    }
+
+    public void setUserRepository(UserRepository userRepository) {
+        this.userRepository = userRepository;
+    }
+
     public User currentUserUsage(){
-        return this.currentUser = userRepository.userExistance(currentUsername);
+        return this.currentUser = userRepository.userExistance(currentUsername); // llega un User con un prod pleaseLoad
     }
 
     public void InitializeAgain(){
@@ -172,6 +184,9 @@ public class ProductController implements Initializable {
                 stage.setScene(scene);
                 stage.setResizable(false);
                 controller.setParentProduct(selected);
+                controller.setSelectedStockFileList(selected.getStockFileList());
+                controller.setUserRepository(userRepository);
+                controller.initializeAgain();
                 stage.showAndWait();
             }catch(IOException e){
                 Alert exception = new Alert(Alert.AlertType.ERROR);

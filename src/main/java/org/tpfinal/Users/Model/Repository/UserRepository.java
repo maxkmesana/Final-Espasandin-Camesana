@@ -1,26 +1,36 @@
 package org.tpfinal.Users.Model.Repository;
 
+import com.google.gson.FieldNamingPolicy;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.reflect.TypeToken;
 import org.mindrot.jbcrypt.BCrypt;
 import org.tpfinal.Interfaces.IntStrategy;
-import org.tpfinal.Product.Controller.ProductController;
 import org.tpfinal.Product.Model.Entity.Product;
 import org.tpfinal.Product.Model.Repository.ProductRepository;
+import org.tpfinal.StockFile.Model.Entity.StockFile;
 import org.tpfinal.StockFile.Model.Repository.IntStrategyAdapter;
+import org.tpfinal.StockFile.Model.Repository.LocalDateTypeAdapter;
+import org.tpfinal.StockFile.Model.Repository.StockFileRepository;
 import org.tpfinal.Users.Model.Entity.User;
 
 import java.io.*;
 import java.lang.reflect.Type;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.Map;
 import java.util.TreeMap;
 
 
 public class UserRepository{
     ProductRepository productRepository;
+    StockFileRepository stockFileRepository;
     private static String PATH = "src/main/resources/user.json";
-    private Gson gson;
+    private Gson gson = new GsonBuilder()
+                .registerTypeAdapter(IntStrategy.class, new IntStrategyAdapter())
+            .setPrettyPrinting()
+                .serializeNulls()
+                .create();
     private Map<String, User> userMap;
 
     public Map<String, User> getUserMap() {
@@ -29,11 +39,6 @@ public class UserRepository{
 
     public UserRepository() {
         productRepository = new ProductRepository();
-        gson = new GsonBuilder()
-                .registerTypeAdapter(IntStrategy.class, new IntStrategyAdapter())
-                .setPrettyPrinting()
-                .serializeNulls()
-                .create();
         loadFromJson();
         IntStrategyAdapter adapter = IntStrategyAdapter.getInstance();
     }
@@ -59,13 +64,18 @@ public class UserRepository{
             userMap.put(entry.getKey(), entry.getValue());
             for(Product product : entry.getValue().getProductSet()){
                 productRepository.add(product);
+//                for (StockFile stockFile : product.getStockFileList()){
+//                    stockFileRepository.add(stockFile);
+//                }
             }
         }
     }
 
     public void saveToJson(){
-        Gson gson = new GsonBuilder().setPrettyPrinting().serializeNulls()
+        gson = new GsonBuilder()
                 .registerTypeAdapter(IntStrategy.class, new IntStrategyAdapter())
+                .setPrettyPrinting()
+                .serializeNulls()
                 .create();
         try(Writer writer = new FileWriter(PATH)){
             gson.toJson(userMap, writer);

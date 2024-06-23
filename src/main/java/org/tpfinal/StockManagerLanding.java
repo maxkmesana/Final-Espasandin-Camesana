@@ -13,6 +13,7 @@ import javafx.stage.Stage;
 import org.tpfinal.Product.Controller.ProductController;
 
 import javafx.event.ActionEvent;
+import org.tpfinal.Users.Model.Repository.UserRepository;
 
 import java.io.IOException;
 import java.net.URL;
@@ -20,6 +21,7 @@ import java.util.ResourceBundle;
 
 public class StockManagerLanding implements Initializable {
     private String currentUsername;
+    private UserRepository hailMaryRepo;
 
     public void setUsername(String username) {
         this.username.setText(username);
@@ -45,6 +47,14 @@ public class StockManagerLanding implements Initializable {
     public void initialize(URL url, ResourceBundle resourceBundle) {
     }
 
+    public UserRepository getHailMaryRepo() {
+        return hailMaryRepo;
+    }
+
+    public void setHailMaryRepo(UserRepository hailMaryRepo) {
+        this.hailMaryRepo = hailMaryRepo;
+    }
+
     @FXML
     public void switchToProdManagment(ActionEvent event){
         try{
@@ -58,6 +68,7 @@ public class StockManagerLanding implements Initializable {
             stage.setScene(scene);
             stage.setResizable(false);
             controller.setCurrentStage(stage);
+            controller.setUserRepository(hailMaryRepo);
             controller.InitializeAgain();
             stage.show();
         }catch(IOException e){

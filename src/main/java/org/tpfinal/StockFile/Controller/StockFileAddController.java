@@ -15,6 +15,7 @@ import org.tpfinal.Interfaces.IntStrategy;
 import org.tpfinal.Product.Model.Entity.Product;
 import org.tpfinal.Seat.Entity.Seat;
 import org.tpfinal.StockFile.Model.Entity.StockFile;
+import org.tpfinal.StockFile.Model.Repository.StockFileRepository;
 import org.tpfinal.Strategies.PEPS;
 import org.tpfinal.Strategies.PPP;
 import org.tpfinal.Strategies.UEPS;
@@ -73,8 +74,10 @@ public class StockFileAddController implements Initializable {
 
     private IntStrategy strategy;
 
+    private List<StockFile> selectedStockFileList;
+
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        userRepository = new UserRepository();
+//        userRepository = new UserRepository(); // ESTAN POR TODOS LADOOOOOOOSSSS SOY UNA BASURAAAAA
         choiceBoxActivity.getItems().addAll("Purchase", "Sale");
         txtFieldDate.setText(LocalDate.now().toString());
 
@@ -83,6 +86,9 @@ public class StockFileAddController implements Initializable {
                 .addListener( (ObservableValue<? extends String> observable, String oldValue, String newValue) -> disableUnitCost(newValue));
     }
 
+    public void initializeAgain(){
+
+    }
 
     public void setCurrentStage(Stage currentStage) {
         this.currentStage = currentStage;
@@ -116,7 +122,6 @@ public class StockFileAddController implements Initializable {
     void clickedSubmit(MouseEvent event) {
         try{
             submit();
-            userRepository.saveToJson();
         }catch (EmptyInputException | InvalidNumberInputException e){
             Alert exception = new Alert(Alert.AlertType.ERROR);
             exception.setHeaderText(null);
@@ -168,6 +173,7 @@ public class StockFileAddController implements Initializable {
                     saleMadePPP(strategy, activity, unitNumber, unitCost);
                     break;
             }
+
             return;
         }
         try{
@@ -179,6 +185,7 @@ public class StockFileAddController implements Initializable {
                     saleMade(strategy, activity, unitNumber, unitCost);
                     break;
             }
+
         }catch (ExceedsAvailableException e){
             Alert exception = new Alert(Alert.AlertType.ERROR);
             exception.setHeaderText(null);
@@ -200,6 +207,8 @@ public class StockFileAddController implements Initializable {
         purchaseStockFile.addBalancePPP(purchaseStockFile.getBalance(), purchaseSeat);
 
         currentTableView.getItems().add(purchaseStockFile);
+        selectedStockFileList.add(purchaseStockFile);
+        userRepository.saveToJson();
     }
 
     public void saleMadePPP(IntStrategy strategy, String activity, Integer unitNumber, Float unitCost){
@@ -210,9 +219,12 @@ public class StockFileAddController implements Initializable {
             List <Seat> salesMade = purchaseStockFile.deleteBalance();
 
             for (Seat sale : salesMade){
-                currentTableView.getItems().add(new StockFile(purchaseStockFile.getActivity(),
+                StockFile newSale = new StockFile(purchaseStockFile.getActivity(),
                         purchaseStockFile.getPurchase(), new Seat(sale), purchaseStockFile.getBalance(),
-                        purchaseStockFile.getBalanceStrategy()));
+                        purchaseStockFile.getBalanceStrategy());
+                currentTableView.getItems().add(newSale);
+                selectedStockFileList.add(newSale);
+                userRepository.saveToJson();
             }
         }catch (ExceedsAvailableException e){
             Alert exception = new Alert(Alert.AlertType.ERROR);
@@ -230,6 +242,8 @@ public class StockFileAddController implements Initializable {
         copyPreviousBalances(purchaseStockFile);
         purchaseStockFile.addBalanceForceLast(purchaseSeat);
         currentTableView.getItems().add(purchaseStockFile);
+        selectedStockFileList.add(purchaseStockFile);
+        userRepository.saveToJson();
     }
 
     public void saleMade(IntStrategy strategy, String activity, Integer unitNumber, Float unitCost){
@@ -240,9 +254,12 @@ public class StockFileAddController implements Initializable {
             List <Seat> salesMade = purchaseStockFile.deleteBalance();
 
             for (Seat sale : salesMade){
-                currentTableView.getItems().add(new StockFile(purchaseStockFile.getActivity(),
+                StockFile newSale = new StockFile(purchaseStockFile.getActivity(),
                         purchaseStockFile.getPurchase(), new Seat(sale), purchaseStockFile.getBalance(),
-                        purchaseStockFile.getBalanceStrategy()));
+                        purchaseStockFile.getBalanceStrategy());
+                currentTableView.getItems().add(newSale);
+                selectedStockFileList.add(newSale);
+                userRepository.saveToJson();
             }
         }catch (ExceedsAvailableException e){
             Alert exception = new Alert(Alert.AlertType.ERROR);
@@ -269,5 +286,21 @@ public class StockFileAddController implements Initializable {
 
     public void setStrategy(Product parentProduct) {
         this.strategy = parentProduct.getStrategy();
+    }
+
+    public List<StockFile> getSelectedStockFileList() {
+        return selectedStockFileList;
+    }
+
+    public void setSelectedStockFileList(List<StockFile> selectedStockFileList) {
+        this.selectedStockFileList = selectedStockFileList;
+    }
+
+    public UserRepository getUserRepository() {
+        return userRepository;
+    }
+
+    public void setUserRepository(UserRepository userRepository) {
+        this.userRepository = userRepository;
     }
 }

@@ -11,7 +11,7 @@ public class Product {
     private String name;
     private String description;
     private IntStrategy strategy;
-    private static List<StockFile> stockFileList;
+    private List<StockFile> stockFileList;
 
     public Product(String name, String description, IntStrategy strategy) {
         this.name = name;
@@ -58,7 +58,7 @@ public class Product {
         return Objects.hashCode(name);
     }
 
-    public static List<StockFile> getStockFileList() {
+    public List<StockFile> getStockFileList() {
         return stockFileList;
     }
 }

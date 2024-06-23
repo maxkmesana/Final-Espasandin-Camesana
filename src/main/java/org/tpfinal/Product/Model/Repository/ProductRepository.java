@@ -10,6 +10,8 @@ import java.util.Set;
 
 public class ProductRepository implements IntRepository<Product> {
     private static Set<Product> productSet;
+    // TODO: SACAR ESE STATIC DE AHI CARAJO. SI HAY MAS USUARIOS VAN A TENER LOS MISMOS DATOS!!!!!!
+    //      actualmente son las 7.48 am y no dormi asi que se refactoriza otro dia.
 
     public ProductRepository() {
         this.productSet = new HashSet<>();
