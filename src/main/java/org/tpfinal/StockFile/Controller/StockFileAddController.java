@@ -18,6 +18,7 @@ import org.tpfinal.StockFile.Model.Entity.StockFile;
 import org.tpfinal.Strategies.PEPS;
 import org.tpfinal.Strategies.PPP;
 import org.tpfinal.Strategies.UEPS;
+import org.tpfinal.Users.Model.Repository.UserRepository;
 
 
 import java.net.URL;
@@ -25,6 +26,8 @@ import java.time.LocalDate;
 import java.util.*;
 
 public class StockFileAddController implements Initializable {
+
+    private UserRepository userRepository;
 
     @FXML
     private Button btnBack;
@@ -72,6 +75,7 @@ public class StockFileAddController implements Initializable {
     private IntStrategy strategy;
 
     public void initialize(URL url, ResourceBundle resourceBundle) {
+        userRepository = new UserRepository();
         choiceBoxActivity.getItems().addAll("Purchase", "Sale");
         txtFieldDate.setText(LocalDate.now().toString());
 
@@ -113,6 +117,7 @@ public class StockFileAddController implements Initializable {
     void clickedSubmit(MouseEvent event) {
         try{
             submit();
+            userRepository.saveToJson();
         }catch (EmptyInputException | InvalidNumberInputException e){
             Alert exception = new Alert(Alert.AlertType.ERROR);
             exception.setHeaderText(null);

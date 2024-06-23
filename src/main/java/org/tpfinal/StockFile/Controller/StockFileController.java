@@ -15,6 +15,7 @@ import org.tpfinal.Product.Model.Entity.Product;
 import org.tpfinal.Seat.Entity.Seat;
 import org.tpfinal.StockFile.Model.Entity.StockFile;
 import org.tpfinal.Strategies.PPP;
+import org.tpfinal.Users.Model.Repository.UserRepository;
 
 import java.io.IOException;
 import java.net.URL;
@@ -24,6 +25,8 @@ import java.util.NoSuchElementException;
 import java.util.ResourceBundle;
 
 public class StockFileController implements Initializable {
+
+    private UserRepository userRepository;
 
     @FXML // fx:id="activitiesColumn"
     private TableColumn<StockFile, String> activitiesColumn; // Value injected by FXMLLoader
@@ -94,6 +97,7 @@ public class StockFileController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+        userRepository = new UserRepository();
         activitiesColumn.setCellValueFactory(new PropertyValueFactory<>("activity"));
         dateColumn.setCellValueFactory(new PropertyValueFactory<>("date"));
         balancesColumn.setCellValueFactory(new PropertyValueFactory<>("balance"));
@@ -172,6 +176,7 @@ public class StockFileController implements Initializable {
                         tableStockFiles.getItems().remove(last);
                         break;
                 }
+                userRepository.saveToJson();
             }
         }catch (NoSuchElementException e){
             Alert exception = new Alert(Alert.AlertType.ERROR);

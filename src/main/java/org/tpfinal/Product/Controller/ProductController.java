@@ -85,13 +85,17 @@ public class ProductController implements Initializable {
         this.nameColumn.setCellValueFactory(new PropertyValueFactory<>("name"));
         this.descriptColumn.setCellValueFactory(new PropertyValueFactory<>("description"));
         filteredSet = FXCollections.observableSet();
-        this.setList.setItems(FXCollections.observableArrayList(ProductRepository.getProductSet()));
 
         this.systemChoiceBox.getItems().addAll(new UEPS(), new PEPS(), new PPP());
     }
 
     public User currentUserUsage(){
         return this.currentUser = userRepository.userExistance(currentUsername);
+    }
+
+    public void InitializeAgain(){
+        User current = currentUserUsage();
+        this.setList.setItems(FXCollections.observableArrayList(current.getProductSet()));
     }
 
     @FXML
@@ -102,7 +106,7 @@ public class ProductController implements Initializable {
         if(name.isEmpty() || description.isEmpty() || strategy == null){
             throw new EmptyFieldException();
         }else{
-            return new Product(name, description,strategy);
+            return new Product(name, description, strategy);
         }
     }
 
@@ -111,7 +115,7 @@ public class ProductController implements Initializable {
         try{
             User current = currentUserUsage();
             Product newProduct = createProduct();
-            current.getProductSet().add(newProduct);//TODO: ya tenemos el como usar el set del usuario, ahora queda hacer funcionales los metodos update y remove
+            current.getProductSet().add(newProduct);
             productRepository.add(newProduct);
             this.setList.setItems(FXCollections.observableArrayList(current.getProductSet()));
             infMessage("Product added successfuly");
@@ -122,6 +126,7 @@ public class ProductController implements Initializable {
             exception.setContentText(e.getMessage());
             exception.showAndWait();
         }
+        userRepository.saveToJson();
     }
 
     @FXML
@@ -205,6 +210,7 @@ public class ProductController implements Initializable {
                 exception.showAndWait();
             }
         }
+        userRepository.saveToJson();
     }
 
     @FXML
@@ -223,6 +229,7 @@ public class ProductController implements Initializable {
             this.setList.getItems().remove(selected);
             this.setList.refresh();
         }
+        userRepository.saveToJson();
     }
 
     @FXML

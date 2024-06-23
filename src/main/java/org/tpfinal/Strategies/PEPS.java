@@ -8,6 +8,11 @@ import java.util.*;
 
 public class PEPS implements IntStrategy {
     // Primero en Entrar, Primero en Salir = FIFO = COLA
+
+
+    public PEPS() {
+    }
+
     @Override
     public void add(List<Seat> balance, Seat add) {
         balance.add(add);

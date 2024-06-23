@@ -102,6 +102,7 @@ public class AdminController implements Initializable {
                     this.userList.setItems(FXCollections.observableArrayList(userRepository.getUserMap().values()));
                     this.userList.refresh();
                     infMessage("Password updated successfuly");
+                    userRepository.saveToJson();
                 }
             }catch(EmptyFieldException e){
                 showError(e.getMessage());
@@ -124,11 +125,13 @@ public class AdminController implements Initializable {
                     this.userList.getItems().remove(selected);
                     this.userList.refresh();
                     infMessage("Password updated successfuly");
+                    userRepository.saveToJson();
                 }
             }catch(EmptyFieldException e){
                 showError(e.getMessage());
             }
         }
+
     }
 
     public void infMessage(String message){

@@ -13,14 +13,11 @@ public class Product {
     private IntStrategy strategy;
     private static List<StockFile> stockFileList;
 
-    static {
-        stockFileList = new LinkedList<>();
-    }
-
     public Product(String name, String description, IntStrategy strategy) {
         this.name = name;
         this.description = description;
         this.strategy = strategy;
+        this.stockFileList = new LinkedList<>();
     }
 
     public String getName() {

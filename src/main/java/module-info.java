@@ -15,6 +15,7 @@ module org.tpfinal.finalcamesanaespasandin {
     opens org.tpfinal.StockFile.Model.Entity;
     opens org.tpfinal.Seat.Entity;
     opens org.tpfinal.Admin.Controller to javafx.fxml;
+    opens org.tpfinal.Strategies to com.google.gson;
 
     exports org.tpfinal;
     exports org.tpfinal.Users.Controller;

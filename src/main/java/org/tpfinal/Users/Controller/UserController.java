@@ -127,6 +127,7 @@ public class UserController implements Initializable {
             }
             Scene scene = new Scene(root);
             Stage stage = (Stage) this.usernamefield.getScene().getWindow();
+            stage.close();
             stage.setScene(scene);
             stage.setResizable(false);
             stage.show();
@@ -142,9 +143,10 @@ public class UserController implements Initializable {
             Parent root = loader.load();
             AdminController controller = loader.getController();
             Scene scene = new Scene(root);
-            Stage stage = new Stage();
+            Stage stage = (Stage) this.usernamefield.getScene().getWindow();
+            stage.close();
             stage.setScene(scene);
-            stage.setResizable(false);
+            stage.setResizable(false);;
             stage.show();
         }catch(IOException e) {
             showError(e.getMessage());

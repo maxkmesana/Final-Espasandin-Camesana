@@ -58,6 +58,7 @@ public class StockManagerLanding implements Initializable {
             stage.setScene(scene);
             stage.setResizable(false);
             controller.setCurrentStage(stage);
+            controller.InitializeAgain();
             stage.show();
         }catch(IOException e){
             showError(e.getMessage());
