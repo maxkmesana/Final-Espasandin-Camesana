@@ -17,7 +17,7 @@
                </font>
             </Label>
             <Button fx:id="buttonManagment" layoutX="20.0" layoutY="121.0" mnemonicParsing="false" onAction="#switchToProdManagment" prefHeight="25.0" prefWidth="216.0" text="Product managment" />
-            <Button fx:id="buttonChange" layoutX="20.0" layoutY="500.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="216.0" text="Change User" />
+            <Button fx:id="buttonChange" layoutX="20.0" layoutY="500.0" mnemonicParsing="false" onAction="#changeUser" prefHeight="25.0" prefWidth="216.0" text="Change User" />
             <Button fx:id="buttonExit" layoutX="20.0" layoutY="546.0" mnemonicParsing="false" onAction="#exit" prefHeight="25.0" prefWidth="216.0" text="Exit" />
             <AnchorPane layoutX="257.0" minHeight="0.0" minWidth="0.0" prefHeight="600.0" prefWidth="767.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="257.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                <children>

@@ -77,19 +77,7 @@ public class UserSignController implements Initializable {
             temp = newUser;
             Stage stage = (Stage) this.button.getScene().getWindow();
             stage.close();
-        } catch (EmptyFieldException e) {
-            Alert exception = new Alert(Alert.AlertType.ERROR);
-            exception.setHeaderText(null);
-            exception.setTitle("Error");
-            exception.setContentText(e.getMessage());
-            exception.showAndWait();
-        } catch (PasswordLimitException e) {
-            Alert exception = new Alert(Alert.AlertType.ERROR);
-            exception.setHeaderText(null);
-            exception.setTitle("Error");
-            exception.setContentText(e.getMessage());
-            exception.showAndWait();
-        } catch (EmailTakenException e){
+        } catch (EmptyFieldException | PasswordLimitException | EmailTakenException e) {
             Alert exception = new Alert(Alert.AlertType.ERROR);
             exception.setHeaderText(null);
             exception.setTitle("Error");

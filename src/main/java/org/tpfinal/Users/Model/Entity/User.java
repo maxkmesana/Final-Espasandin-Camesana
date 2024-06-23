@@ -19,7 +19,6 @@ public class User extends Person {
     private String password;
     private String path;
     private Set<Product> productSet;
-    //private static ObservableSet<Product> productSet;
 
     public User(String name, String email, String username, String password) {
         super(name, email);

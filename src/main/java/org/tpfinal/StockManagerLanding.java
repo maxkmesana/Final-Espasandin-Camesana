@@ -60,17 +60,36 @@ public class StockManagerLanding implements Initializable {
             controller.setCurrentStage(stage);
             stage.show();
         }catch(IOException e){
-            Alert exception = new Alert(Alert.AlertType.ERROR);
-            exception.setHeaderText(null);
-            exception.setTitle("Error");
-            exception.setContentText(e.getMessage());
-            exception.showAndWait();
+            showError(e.getMessage());
+        }
+    }
+
+    public void changeUser(){
+        try {
+            FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("userLogin.fxml"));
+            Scene scene = new Scene(fxmlLoader.load());
+            Stage stage = (Stage) this.buttonChange.getScene().getWindow();
+            stage.close();
+            stage.setTitle("Welcome to StockManager");
+            stage.setScene(scene);
+            stage.setResizable(false);
+            stage.show();
+        }catch(IOException e){
+            showError(e.getMessage());
         }
     }
 
     public void exit(){
         Stage stage = (Stage) this.buttonExit.getScene().getWindow();
         stage.close();
+    }
+
+    private void showError(String message) {
+        Alert exception = new Alert(Alert.AlertType.ERROR);
+        exception.setHeaderText(null);
+        exception.setTitle("Error");
+        exception.setContentText(message);
+        exception.showAndWait();
     }
 
 }

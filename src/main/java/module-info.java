@@ -14,6 +14,7 @@ module org.tpfinal.finalcamesanaespasandin {
     opens org.tpfinal.StockFile.Controller to javafx.fxml;
     opens org.tpfinal.StockFile.Model.Entity;
     opens org.tpfinal.Seat.Entity;
+    opens org.tpfinal.Admin.Controller to javafx.fxml;
 
     exports org.tpfinal;
     exports org.tpfinal.Users.Controller;

@@ -5,6 +5,7 @@
 <?import javafx.scene.control.Separator?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
@@ -21,7 +22,7 @@
         </columns>
       </TableView>
       <Button fx:id="updateButton" layoutX="35.0" layoutY="153.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="138.0" text="Update user password" />
-      <Button fx:id="removeButton" layoutX="35.0" layoutY="212.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="138.0" text="Remove user" />
+      <Button fx:id="removeButton" layoutX="35.0" layoutY="372.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="138.0" text="Remove user" />
       <Separator layoutX="203.0" orientation="VERTICAL" prefHeight="600.0" prefWidth="27.0" />
       <Separator layoutX="4.0" layoutY="109.0" prefHeight="3.0" prefWidth="211.0" />
       <Label alignment="CENTER" layoutX="51.0" layoutY="37.0" prefHeight="48.0" prefWidth="118.0" text="Admin">
@@ -30,5 +31,8 @@
          </font>
       </Label>
       <Button fx:id="exitButton" layoutX="41.0" layoutY="539.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="138.0" text="Exit" />
+      <TextField fx:id="usernameField" layoutX="30.0" layoutY="210.0" />
+      <TextField fx:id="passwordField" layoutX="30.0" layoutY="261.0" />
+      <TextField fx:id="newPasswordField" layoutX="30.0" layoutY="313.0" />
    </children>
 </AnchorPane>

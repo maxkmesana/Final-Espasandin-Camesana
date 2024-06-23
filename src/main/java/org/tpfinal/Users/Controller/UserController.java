@@ -11,6 +11,8 @@ import javafx.scene.input.MouseEvent;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import org.mindrot.jbcrypt.BCrypt;
+import org.tpfinal.Admin.Controller.AdminController;
+import org.tpfinal.Admin.Model.Entity.Admin;
 import org.tpfinal.Exception.EmptyFieldException;
 import org.tpfinal.StockManagerLanding;
 import org.tpfinal.Users.Model.Entity.User;
@@ -24,6 +26,7 @@ import java.util.ResourceBundle;
 public class UserController implements Initializable {
 
     private UserRepository userRepository;
+    private Admin admin;
 
     public UserController() {
     }
@@ -49,6 +52,7 @@ public class UserController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         userRepository = new UserRepository();
+        admin = new Admin();
     }
 
     @FXML
@@ -63,32 +67,12 @@ public class UserController implements Initializable {
                     (UserSignController.getTemp() != null &&
                             username.equals(UserSignController.getTemp().getUsername()) &&
                             BCrypt.checkpw(password, UserSignController.getTemp().getPassword()))) {
-                try{
-                    FXMLLoader loader = new FXMLLoader(getClass().getResource("/org/tpfinal/stockManagerLanding.fxml"));
-                    Parent root = loader.load();
-                    StockManagerLanding controller = loader.getController();
-                    controller.setUsername(toCheck.getUsername());
-                    Scene scene = new Scene(root);
-                    Stage stage = (Stage) this.usernamefield.getScene().getWindow();
-                    stage.setScene(scene);
-                    stage.setResizable(false);
-                    stage.show();
-                }catch(IOException e){
-                    Alert exception = new Alert(Alert.AlertType.ERROR);
-                    exception.setHeaderText(null);
-                    exception.setTitle("Error");
-                    exception.setContentText(e.getMessage());
-                    exception.showAndWait();
-                }
-            } else {
-                Alert exception = new Alert(Alert.AlertType.ERROR);
-                exception.setHeaderText(null);
-                exception.setTitle("Error");
-                exception.setContentText("Invalid username or password, try again.");
-                exception.showAndWait();
-            }/*else if(username == "Admin" && password == "Admin123"){
-
-            }*/
+                loadUser("/org/tpfinal/stockManagerLanding.fxml", toCheck.getUsername());
+            }else if(username.equals(admin.getUsername()) && BCrypt.checkpw(password, admin.getPassword())){
+                loadAdmin("/org/tpfinal/adminView.fxml");
+            }else{
+                showError("Invalid username or password, try again.");
+            }
         }
         return null;
     }
@@ -115,14 +99,6 @@ public class UserController implements Initializable {
         }
     }
 
-    private void showModalWindow(Scene scene) {
-        Stage stage = new Stage();
-        stage.initModality(Modality.APPLICATION_MODAL);
-        stage.setScene(scene);
-        stage.setResizable(false);
-        stage.showAndWait();
-    }
-
     @FXML
     public void createUser(ActionEvent event){
         try{
@@ -140,6 +116,56 @@ public class UserController implements Initializable {
         }
     }
 
+    @FXML
+    private void loadUser(String fxmlPath, String username) {
+        try{
+            FXMLLoader loader = new FXMLLoader(getClass().getResource(fxmlPath));
+            Parent root = loader.load();
+            if(username != null) {
+                StockManagerLanding controller = loader.getController();
+                controller.setUsername(username);
+            }
+            Scene scene = new Scene(root);
+            Stage stage = (Stage) this.usernamefield.getScene().getWindow();
+            stage.setScene(scene);
+            stage.setResizable(false);
+            stage.show();
+        }catch(IOException e) {
+            showError(e.getMessage());
+        }
+    }
+
+    @FXML
+    private void loadAdmin(String fxmlPath) {
+        try{
+            FXMLLoader loader = new FXMLLoader(getClass().getResource(fxmlPath));
+            Parent root = loader.load();
+            AdminController controller = loader.getController();
+            Scene scene = new Scene(root);
+            Stage stage = new Stage();
+            stage.setScene(scene);
+            stage.setResizable(false);
+            stage.show();
+        }catch(IOException e) {
+            showError(e.getMessage());
+        }
+    }
+
+    private void showError(String message) {
+        Alert exception = new Alert(Alert.AlertType.ERROR);
+        exception.setHeaderText(null);
+        exception.setTitle("Error");
+        exception.setContentText(message);
+        exception.showAndWait();
+    }
+
+    private void showModalWindow(Scene scene) {
+        Stage stage = new Stage();
+        stage.initModality(Modality.APPLICATION_MODAL);
+        stage.setScene(scene);
+        stage.setResizable(false);
+        stage.showAndWait();
+    }
 }
 
 

@@ -17,8 +17,6 @@ public class Product {
         stockFileList = new LinkedList<>();
     }
 
-
-
     public Product(String name, String description, IntStrategy strategy) {
         this.name = name;
         this.description = description;
