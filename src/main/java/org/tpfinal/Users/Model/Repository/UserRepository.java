@@ -64,9 +64,6 @@ public class UserRepository{
             userMap.put(entry.getKey(), entry.getValue());
             for(Product product : entry.getValue().getProductSet()){
                 productRepository.add(product);
-//                for (StockFile stockFile : product.getStockFileList()){
-//                    stockFileRepository.add(stockFile);
-//                }
             }
         }
     }

@@ -97,9 +97,26 @@
             }
           }
         ]
+      },
+      {
+        "name": "NAMEOFPRODUCT2",
+        "description": "DESCRIPTION2",
+        "strategy": {
+          "type": "org.tpfinal.Strategies.PPP",
+          "data": {}
+        },
+        "stockFileList": []
       }
     ],
     "name": "test",
     "email": "test"
+  },
+  "yate": {
+    "id": "1f8d7bdb-bd0c-4548-a877-8bffe54e1927",
+    "username": "yate",
+    "password": "$2a$10$eh472sTJIXlxdYRPbPnj2.z6HdKbjvw2yRuPxo0PC/PiYAb56f58K",
+    "productSet": [],
+    "name": "yatel espasandin",
+    "email": "yatel.espasandin@gmail.com"
   }
 }

@@ -125,15 +125,7 @@ public class StockFileController implements Initializable {
     }
 
     public void initializeAgain(){
-        // Esta linea de aca, SUMADA, a todos los putos UserRepo que saque antes de llegar
-        // en el trazado (GIGANTESCO) hasta aca, me costaron al menos 5 horas de mi noche.
-        // Actualmente son las 8.43 am del 23/6 (hoy se entrega) :).
-        // En resumen: yate = un forro, yo = un forro, new UserRepository = una poronga
-//        userRepository = new UserRepository();
 
-
-
-//        stockFileRepository = new StockFileRepository();
         populateStockFiles();
     }
 

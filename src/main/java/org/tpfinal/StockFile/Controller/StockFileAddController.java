@@ -77,17 +77,12 @@ public class StockFileAddController implements Initializable {
     private List<StockFile> selectedStockFileList;
 
     public void initialize(URL url, ResourceBundle resourceBundle) {
-//        userRepository = new UserRepository(); // ESTAN POR TODOS LADOOOOOOOSSSS SOY UNA BASURAAAAA
         choiceBoxActivity.getItems().addAll("Purchase", "Sale");
         txtFieldDate.setText(LocalDate.now().toString());
 
         choiceBoxActivity.getSelectionModel()
                 .selectedItemProperty()
                 .addListener( (ObservableValue<? extends String> observable, String oldValue, String newValue) -> disableUnitCost(newValue));
-    }
-
-    public void initializeAgain(){
-
     }
 
     public void setCurrentStage(Stage currentStage) {

@@ -33,24 +33,17 @@ import java.util.ResourceBundle;
 public class ProductController implements Initializable {
     private ProductRepository productRepository;
 
-
-
     private UserRepository userRepository;
 
     private String currentUsername;
+
     User currentUser;
-
-    public void getUsername(String username){
-        this.currentUsername = username;
-    }
-
 
     @FXML
     private Button backButton;
 
     @FXML
     private TextArea descripField;
-
 
     @FXML
     private TextField nameField;
@@ -82,9 +75,12 @@ public class ProductController implements Initializable {
 
     private Stage currentStage;
 
+    public void getUsername(String username){
+        this.currentUsername = username;
+    }
+
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-//        userRepository = new UserRepository(); // YATE TE VEO Y TE PEGO UN TIRO. BASTA DE CREAR USER REPOSITORIES. BASTA
         productRepository = new ProductRepository();
         this.nameColumn.setCellValueFactory(new PropertyValueFactory<>("name"));
         this.descriptColumn.setCellValueFactory(new PropertyValueFactory<>("description"));
@@ -150,7 +146,7 @@ public class ProductController implements Initializable {
             this.setList.setItems(FXCollections.observableArrayList(current.getProductSet()));
         } else {
             this.filteredSet.clear();
-            for (Product product : ProductRepository.getProductSet()) {
+            for (Product product : current.getProductSet()) {
                 if (product.getName().toLowerCase().contains(filterName.toLowerCase())) {
                     this.filteredSet.add(product);
                 }
