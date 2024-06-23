@@ -11,7 +11,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="598.0" prefWidth="719.0" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.tpfinal.Product.Controller.ProductController">
+<AnchorPane prefHeight="598.0" prefWidth="719.0" stylesheets="@../../Styles/productManagement.css" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.tpfinal.Product.Controller.ProductController">
    <children>
       <TableView fx:id="setList" layoutX="324.0" layoutY="107.0" onMouseClicked="#selectProduct" prefHeight="403.0" prefWidth="366.0">
         <columns>
@@ -26,8 +26,8 @@
       <Separator layoutX="-7.0" layoutY="533.0" prefHeight="13.0" prefWidth="726.0" />
       <TextArea fx:id="descripField" layoutX="106.0" layoutY="226.0" prefHeight="120.0" prefWidth="189.0" />
       <TextField fx:id="nameField" layoutX="106.0" layoutY="137.0" prefHeight="25.0" prefWidth="189.0" />
-      <Label fx:id="nameLabel" layoutX="67.0" layoutY="141.0" text="Name" />
-      <Label fx:id="descrpLabel" layoutX="35.0" layoutY="226.0" text="Description" />
+      <Label fx:id="nameLabel" layoutX="55.0" layoutY="132.0" text="Name" />
+      <Label fx:id="descrpLabel" layoutX="8.0" layoutY="222.0" text="Description" />
       <TextField fx:id="filterField" layoutX="501.0" layoutY="66.0" onKeyReleased="#filterProducts" prefHeight="25.0" prefWidth="189.0" />
       <Label layoutX="405.0" layoutY="70.0" text="Filter by name" />
       <Label layoutX="35.0" layoutY="40.0" text="Product Managment">
@@ -36,7 +36,7 @@
          </font>
       </Label>
       <Button fx:id="stockManagementButton" disable="true" layoutX="26.0" layoutY="433.0" mnemonicParsing="false" onMouseClicked="#stockManagementClicked" prefHeight="25.0" prefWidth="272.0" text="Go to product's stock manager" />
-      <Label fx:id="systemLabel" layoutX="64.0" layoutY="184.0" text="System" />
+      <Label fx:id="systemLabel" layoutX="37.0" layoutY="175.0" text="System" />
       <ChoiceBox fx:id="systemChoiceBox" layoutX="106.0" layoutY="180.0" prefHeight="25.0" prefWidth="189.0" />
    </children>
 </AnchorPane>
