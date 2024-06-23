@@ -10,7 +10,7 @@ import java.util.List;
 import java.util.UUID;
 
 public class StockFile {
-    private LocalDate date;
+    private String date;
     private String activity;
     private Seat purchase;
     private Seat sale;
@@ -18,7 +18,7 @@ public class StockFile {
     private IntStrategy balanceStrategy;
 
     public StockFile(String activity, Seat purchase, Seat sale, IntStrategy balanceStrategy) {
-        this.date = LocalDate.now();
+        this.date = LocalDate.now().toString();
         this.activity = activity;
         this.purchase = purchase;
         this.sale = sale;
@@ -27,7 +27,7 @@ public class StockFile {
     }
 
     public StockFile(String activity, Seat purchase, Seat sale, List<Seat> balance, IntStrategy balanceStrategy) {
-        this.date = LocalDate.now();
+        this.date = LocalDate.now().toString();
         this.activity = activity;
         this.purchase = purchase;
         this.sale = sale;
@@ -35,11 +35,11 @@ public class StockFile {
         this.balanceStrategy = balanceStrategy;
     }
 
-    public LocalDate getDate() {
+    public String getDate() {
         return date;
     }
 
-    public void setDate(LocalDate date) {
+    public void setDate(String date) {
         this.date = date;
     }
 

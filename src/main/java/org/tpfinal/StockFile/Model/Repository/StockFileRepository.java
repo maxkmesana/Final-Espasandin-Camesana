@@ -31,7 +31,7 @@ public class StockFileRepository implements IntRepository<StockFile> {
     @Override
     public void update(StockFile toUpdate, StockFile updated) {
         toUpdate.setActivity(updated.getActivity());
-        toUpdate.setDate(updated.getDate());
+        toUpdate.setDate(updated.getDate().toString());
         toUpdate.setSale(updated.getSale());
         toUpdate.setPurchase(updated.getPurchase());
     }

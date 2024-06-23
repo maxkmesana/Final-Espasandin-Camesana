@@ -109,6 +109,7 @@ public class UserController implements Initializable {
             Parent root = loader.load();
             UserSignController signController = loader.getController();
             Scene scene = new Scene(root, 600, 600);
+            signController.setUserRepository(userRepository);
             showModalWindow(scene);
         }catch(IOException e){
             Alert exception = new Alert(Alert.AlertType.ERROR);
@@ -127,12 +128,14 @@ public class UserController implements Initializable {
             if(username != null) {
                 StockManagerLanding controller = loader.getController();
                 controller.setUsername(username);
+                controller.setHailMaryRepo(userRepository);
             }
             Scene scene = new Scene(root);
             Stage stage = (Stage) this.usernamefield.getScene().getWindow();
             stage.close();
             stage.setScene(scene);
             stage.setResizable(false);
+
             stage.show();
         }catch(IOException e) {
             showError(e.getMessage());

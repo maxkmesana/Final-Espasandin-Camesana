@@ -1,59 +1,105 @@
 {
-  "yate": {
-    "id": "ecc5270f-257f-4edd-a98b-072bb076c515",
-    "username": "yate",
-    "password": "$2a$10$BYMwXlWazvdNMFZ0hGtAQO5u6PbvXPc6o5DL7Kqr0Z7TLMCulsaVG",
+  "test": {
+    "id": "145b0e24-123e-4800-943c-5c404b69fdc5",
+    "username": "test",
+    "password": "$2a$10$etHbZYHyWAPJaULAfWErEuNfDxaQbY.6ViyyDACLog7LAqQ8vlE5G",
     "productSet": [
       {
-        "name": "asdasd",
-        "description": "asdasd",
+        "name": "NAMEOFPRODUCT",
+        "description": "DESCRIPTION",
         "strategy": {
           "type": "org.tpfinal.Strategies.PEPS",
           "data": {}
-        }
+        },
+        "stockFileList": [
+          {
+            "date": "2024-06-23",
+            "activity": "Purchase",
+            "purchase": {
+              "uuid": "4aad414c-800e-4b24-bb7c-208e018dbea0",
+              "amount": 150,
+              "unitCost": 21.0,
+              "totalCost": 3150.0
+            },
+            "sale": {
+              "uuid": null,
+              "amount": 0,
+              "unitCost": 0.0,
+              "totalCost": 0.0
+            },
+            "balance": [
+              {
+                "uuid": "4aad414c-800e-4b24-bb7c-208e018dbea0",
+                "amount": 150,
+                "unitCost": 21.0,
+                "totalCost": 3150.0
+              }
+            ],
+            "balanceStrategy": {
+              "type": "org.tpfinal.Strategies.PEPS",
+              "data": {}
+            }
+          },
+          {
+            "date": "2024-06-23",
+            "activity": "Sale",
+            "purchase": {
+              "uuid": null,
+              "amount": 0,
+              "unitCost": 0.0,
+              "totalCost": 0.0
+            },
+            "sale": {
+              "uuid": "0eb119f7-913a-4023-9bbd-0451438b9a55",
+              "amount": 10,
+              "unitCost": 21.0,
+              "totalCost": 210.0
+            },
+            "balance": [
+              {
+                "uuid": "4aad414c-800e-4b24-bb7c-208e018dbea0",
+                "amount": 140,
+                "unitCost": 21.0,
+                "totalCost": 2940.0
+              }
+            ],
+            "balanceStrategy": {
+              "type": "org.tpfinal.Strategies.PEPS",
+              "data": {}
+            }
+          },
+          {
+            "date": "2024-06-23",
+            "activity": "Sale",
+            "purchase": {
+              "uuid": null,
+              "amount": 0,
+              "unitCost": 0.0,
+              "totalCost": 0.0
+            },
+            "sale": {
+              "uuid": "d3e9f76e-a6c7-4cf3-8a45-31c44c333551",
+              "amount": 10,
+              "unitCost": 21.0,
+              "totalCost": 210.0
+            },
+            "balance": [
+              {
+                "uuid": "4aad414c-800e-4b24-bb7c-208e018dbea0",
+                "amount": 130,
+                "unitCost": 21.0,
+                "totalCost": 2730.0
+              }
+            ],
+            "balanceStrategy": {
+              "type": "org.tpfinal.Strategies.PEPS",
+              "data": {}
+            }
+          }
+        ]
       }
     ],
-    "name": "yate",
-    "email": "yate"
-  },
-  "yatel": {
-    "id": "e118c4b3-7ef8-423b-b3ce-470029fedf5c",
-    "username": "yatel",
-    "password": "$2a$10$HtAbQF1FtTdTrq2SLGNdxOHavHQv2tgkg6XgM7RFV9LpKLkLftgr.",
-    "productSet": [],
-    "name": "yatel",
-    "email": "yatel;"
-  },
-  "caro": {
-    "id": "93b00d37-e86e-41c4-8bc3-bf9b5d558220",
-    "username": "caro",
-    "password": "$2a$10$w6LmXHP2PzYa336EdBfHU.hGQj5Du1uPjbDBBdgZ7Yn3SgnRp/JUC",
-    "productSet": [],
-    "name": "caro",
-    "email": "fernandezrrios,mc@gmail.com"
-  },
-  "pepito": {
-    "id": "df86e8c9-a295-4423-9c80-9b1bbb5f3baa",
-    "username": "pepito",
-    "password": "$2a$10$JpqgsBUAmhMuh2G3CpmIMO.EXdqVs.LRPaZOoI9HINye5nQEf492u",
-    "productSet": [],
-    "name": "pepe",
-    "email": "pepe"
-  },
-  "test": {
-    "id": "f29cbba2-dde5-4260-a2b7-036d558ef92d",
-    "username": "test",
-    "password": "$2a$10$TZMzc2fkhpVpW40uFmH5Eu7Z7igpFe4BYdbifyUCLqKrW3dq6QoNm",
-    "productSet": [],
     "name": "test",
     "email": "test"
-  },
-  "USERUSER": {
-    "id": "d5a965a3-9973-4768-814a-c6176613242f",
-    "username": "USERUSER",
-    "password": "$2a$10$07mkJzG0KUzpJ.sNTsPpxODmccxVslBNTXQBfmi.4PQ5wL1Wqe.Gu",
-    "productSet": [],
-    "name": "USEEEEEEER",
-    "email": "EEEEMAAAIL@gmail.com"
   }
 }

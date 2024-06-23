@@ -14,7 +14,7 @@ import org.tpfinal.Users.Model.Repository.UserRepository;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-public class UserSignController implements Initializable {
+public class UserSignController{
     private UserRepository userRepository;
 
     private static User temp;
@@ -44,9 +44,12 @@ public class UserSignController implements Initializable {
     @FXML
     private TextField usernameField;
 
-    @Override
-    public void initialize(URL url, ResourceBundle resourceBundle) {
-        userRepository = new UserRepository();
+    public UserRepository getUserRepository() {
+        return userRepository;
+    }
+
+    public void setUserRepository(UserRepository userRepository) {
+        this.userRepository = userRepository;
     }
 
     @FXML

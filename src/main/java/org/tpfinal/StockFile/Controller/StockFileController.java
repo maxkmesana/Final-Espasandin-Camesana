@@ -14,6 +14,7 @@ import javafx.stage.Stage;
 import org.tpfinal.Product.Model.Entity.Product;
 import org.tpfinal.Seat.Entity.Seat;
 import org.tpfinal.StockFile.Model.Entity.StockFile;
+import org.tpfinal.StockFile.Model.Repository.StockFileRepository;
 import org.tpfinal.Strategies.PPP;
 import org.tpfinal.Users.Model.Repository.UserRepository;
 
@@ -27,6 +28,8 @@ import java.util.ResourceBundle;
 public class StockFileController implements Initializable {
 
     private UserRepository userRepository;
+
+    private StockFileRepository stockFileRepository;
 
     @FXML // fx:id="activitiesColumn"
     private TableColumn<StockFile, String> activitiesColumn; // Value injected by FXMLLoader
@@ -95,9 +98,10 @@ public class StockFileController implements Initializable {
 
     private Product parentProduct;
 
+    private List<StockFile> selectedStockFileList;
+
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        userRepository = new UserRepository();
         activitiesColumn.setCellValueFactory(new PropertyValueFactory<>("activity"));
         dateColumn.setCellValueFactory(new PropertyValueFactory<>("date"));
         balancesColumn.setCellValueFactory(new PropertyValueFactory<>("balance"));
@@ -118,6 +122,18 @@ public class StockFileController implements Initializable {
         unitCostColumnB.setCellValueFactory(new PropertyValueFactory<>("unitCost"));
         totalCostColumnB.setCellValueFactory(new PropertyValueFactory<>("totalCost"));
 
+    }
+
+    public void initializeAgain(){
+        // Esta linea de aca, SUMADA, a todos los putos UserRepo que saque antes de llegar
+        // en el trazado (GIGANTESCO) hasta aca, me costaron al menos 5 horas de mi noche.
+        // Actualmente son las 8.43 am del 23/6 (hoy se entrega) :).
+        // En resumen: yate = un forro, yo = un forro, new UserRepository = una poronga
+//        userRepository = new UserRepository();
+
+
+
+//        stockFileRepository = new StockFileRepository();
         populateStockFiles();
     }
 
@@ -136,7 +152,8 @@ public class StockFileController implements Initializable {
             stockFileAddController.setCurrentStage(stage);
             stockFileAddController.setCurrentTableView(tableStockFiles);
             stockFileAddController.setStrategy(parentProduct);
-
+            stockFileAddController.setSelectedStockFileList(selectedStockFileList);
+            stockFileAddController.setUserRepository(userRepository);
             stage.showAndWait();
         }catch(IOException e){
             Alert exception = new Alert(Alert.AlertType.ERROR);
@@ -158,7 +175,6 @@ public class StockFileController implements Initializable {
 
     @FXML
     void deleteButtonClicked(MouseEvent event) {
-
         try{
             StockFile last = tableStockFiles.getItems().getLast();
 
@@ -171,9 +187,11 @@ public class StockFileController implements Initializable {
                     case "Purchase":
                         last.getBalance().remove(last.getPurchase());
                         tableStockFiles.getItems().remove(last);
+                        selectedStockFileList.add(last);
                         break;
                     case "Sale":
                         tableStockFiles.getItems().remove(last);
+                        selectedStockFileList.remove(last);
                         break;
                 }
                 userRepository.saveToJson();
@@ -190,6 +208,7 @@ public class StockFileController implements Initializable {
     public void deletePppRedirect(StockFile currentStockFile){
         currentStockFile = stockFileAddController.getPreviousPPP();
         tableStockFiles.getItems().remove(tableStockFiles.getItems().getLast());
+        stockFileRepository.remove(tableStockFiles.getItems().getLast());
     }
 
     public StockFile previousStockFile(StockFile currentStockFile){
@@ -204,7 +223,7 @@ public class StockFileController implements Initializable {
     }
 
     public void populateStockFiles(){
-        for (StockFile stockFile : Product.getStockFileList()){
+        for (StockFile stockFile : selectedStockFileList){
             tableStockFiles.getItems().add(stockFile);
         }
     }
@@ -223,5 +242,21 @@ public class StockFileController implements Initializable {
     public void setParentProduct(Product parentProduct) {
         this.parentProduct = parentProduct;
         labelProdName.setText(parentProduct.getName() + ": " + parentProduct.getStrategy().toString());
+    }
+
+    public List<StockFile> getSelectedStockFileList() {
+        return selectedStockFileList;
+    }
+
+    public void setSelectedStockFileList(List<StockFile> selectedStockFileList) {
+        this.selectedStockFileList = selectedStockFileList;
+    }
+
+    public UserRepository getUserRepository() {
+        return userRepository;
+    }
+
+    public void setUserRepository(UserRepository userRepository) {
+        this.userRepository = userRepository;
     }
 }
