@@ -6,6 +6,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Modality;
@@ -84,7 +85,9 @@ public class UserController implements Initializable {
 
     @FXML
     void enterPressedLogin(KeyEvent event) {
-        login();
+        if(event.getCode() == KeyCode.ENTER){
+            login();
+        }
     }
 
     public void login(){
