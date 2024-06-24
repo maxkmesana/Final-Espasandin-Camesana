@@ -23,7 +23,7 @@
             <Font size="13.0" />
          </font>
       </Label>
-      <Button fx:id="button" layoutX="243.0" layoutY="475.0" mnemonicParsing="false" onAction="#createUser" prefHeight="25.0" prefWidth="115.0" text="Sumbit" />
+      <Button fx:id="button" layoutX="243.0" layoutY="475.0" mnemonicParsing="false" onAction="#createUser" prefHeight="25.0" prefWidth="115.0" text="Submit" />
       <Label layoutX="101.0" layoutY="138.0" prefHeight="19.0" prefWidth="45.0" text="Name">
          <font>
             <Font size="13.0" />
