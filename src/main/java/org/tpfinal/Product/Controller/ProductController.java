@@ -162,6 +162,7 @@ public class ProductController implements Initializable {
             this.nameField.setText(selected.getName());
             this.descripField.setText(selected.getDescription());
             this.stockManagementButton.setDisable(false);
+            this.systemChoiceBox.setValue(selected.getStrategy());
         }else{
             stockManagementButton.setDisable(true);
         }
